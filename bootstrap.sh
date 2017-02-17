@@ -39,7 +39,7 @@ bootstrap_bash()
   # check all files and add the lines
   for bash_file in ${bash_files[@]}; do
     # ensure file exists
-    if [[ -nf ${bash_file} ]]; then
+    if [[ ! -f ${bash_file} ]]; then
       touch ${bash_file}
     fi
     # ensure common 
