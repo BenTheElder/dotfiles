@@ -20,8 +20,8 @@ import os
 def get_go_versions():
     data = urllib.urlopen('https://go.googlesource.com/go/+refs').read()
     res = set()
-    for match in re.finditer('go([0-9]+).([0-9]+).([0-9]+)', data):
-        res.add(tuple(map(int, match.groups())))
+    for match in re.finditer('go([0-9]+).([0-9]+).([0-9]+)?', data):
+        res.add(tuple(map(int, [x for x in match.groups() if x is not None])))
     return sorted(res)[::-1]
 
 def ask_yes_no(query):
