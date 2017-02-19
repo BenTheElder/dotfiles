@@ -1,3 +1,8 @@
+#!/bin/bash
+# ^- this is so that this file is detected as bash
+# this is an include file, not a script.
+
+
 # this is all I want when editing a commit message etc.
 # other editors can be opened explicitly
 export EDITOR=nano
@@ -18,11 +23,16 @@ BLACK="\[$(tput setaf 0)\]"
 RED="\[$(tput setaf 1)\]"
 GREEN="\[$(tput setaf 2)\]"
 YELLOW="\[$(tput setaf 3)\]"
-BLUE="\[$(tput setf 4)\]"
+BLUE="\[$(tput setaf 4)\]"
 CYAN="\[$(tput setaf 6)\]"
+BLUE256="\[$(tput setaf 20)\]"
 LBLUE256="\[$(tput setaf 33)\]"
 GREEN256="\[$(tput setaf 71)\]"
 BLACK256="\[$(tput setaf 232)\]"
+GRAY256="\[$(tput setaf 239)\]"
+YELLOW256="\[$(tput setaf 178)\]"
+RED256="\[$(tput setaf 160)\]"
+WHITE256="\[$(tput setaf 255)\]"
 # more colors
 BG_BLACK="\[$(tput setab 0)\]"
 BG_WHITE="\[$(tput setab 7)\]"
@@ -41,13 +51,13 @@ BG_GREEN256="\[$(tput setab 34)\]"
 # custom PS1
 PS1="${DEFAULT}\n${BOLD}"
 PS1+="${BG_WHITE}${BLACK256}["
-PS1+="${WHITE}${BG_BLUE256} \u "
-PS1+="${BG_RED256} at "
+PS1+="${WHITE256}${BG_BLUE256} \u "
+PS1+="${BG_RED256} @ "
 PS1+="${BG_YELLOW256} \H "
-PS1+="${BG_BLUE256} in "
+PS1+="${BG_BLUE256} : "
 PS1+="${BG_GREEN256} \w "
 PS1+="${BLACK256}${BG_WHITE}]"
-PS1+="${DEFAULT}\n"
-PS1+="${DEFAULT}${WHITE}${BOLD}%"
+PS1+="${DEFAULT}"
+PS1+="${DEFAULT}${WHITE}${BOLD}\n$"
 PS1+="${DEFAULT}${WHITE} "
 export PS1;

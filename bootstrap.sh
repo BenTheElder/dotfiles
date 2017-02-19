@@ -73,13 +73,15 @@ bootstrap_bash()
 #######################################
 symlink_dir()
 {
-  for link_file in $(find "${LINK_DIR}" -type f); do
-    link_target="${HOME}"${link_file#$LINK_DIR}
-    (
-      set -x;
-      ln -s ${link_file} ${link_target};
-    )
-  done
+  if [ -d ${LINK_DIR} ]; then
+    for link_file in $(find -L "${LINK_DIR}" -not -type d); do
+      link_target="${HOME}"${link_file#$LINK_DIR}
+      (
+        set -x;
+        ln -s ${link_file} ${link_target};
+      )
+    done
+  fi
 }
 
 # entry point
@@ -101,6 +103,7 @@ main()
   if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\nDetected macOS";
     read -p "Symlink files in ./tilde_macos to ~/ ? (y/n): " -n 1 reply;
+    echo "";
     if [[ ${reply} =~ ^[Y|y]$ ]]; then
       LINK_DIR="${DIR}/tilde_macos"
       symlink_dir
@@ -108,12 +111,12 @@ main()
   elif [[ "$OSTYPE"  == "linux-gnu" ]]; then
     echo "Detected Linux";
     read -p "Symlink files in ./tilde_linux to ~/ ? (y/n): " -n 1 reply;
+    echo "";
     if [[ ${reply} =~ ^[Y|y]$ ]]; then
       LINK_DIR="${DIR}/tilde_linux"
       symlink_dir
     fi
   fi
-  echo "";
 }
 
 main "$@"
