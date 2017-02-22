@@ -7,9 +7,9 @@ this currently requires python2.7
 USE AT YOUR OWN RISK.
 """
 
-#TODO: support getting other versions and arches, etc.
-#TODO: get and check hashes
-#TODO: support windows?
+# TODO: support getting other versions and arches, etc.
+# TODO: get and check hashes
+# TODO: support windows?
 
 import re
 import urllib
@@ -21,17 +21,17 @@ def get_go_versions():
     data = urllib.urlopen('https://go.googlesource.com/go/+refs').read()
     res = set()
     for match in re.finditer('go([0-9]+).([0-9]+).([0-9]+)?', data):
-        res.add(tuple(map(int, [x for x in match.groups() if x is not None])))
+        res.add(tuple((int(x) for x in match.groups() if x is not None)))
     return sorted(res)[::-1]
 
 def ask_yes_no(query):
     input = raw_input(query+" (y/n): ")
-    while input != "y" and input != "n":
+    while input.lower() not in ["y", "n"]:
         input = raw_input("please enter 'y' or 'n': ")
-    return input == "y"
+    return input.lower() == "y"
 
 def get_goos_and_arch():
-    #TODO: support possible other systems
+    # TODO: support possible other systems
     platform_to_goos = {
         "linux2": "linux",
         "linux": "linux",
