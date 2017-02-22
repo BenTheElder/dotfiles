@@ -2,7 +2,7 @@
     "window.zoomLevel": 0,
     "editor.fontSize": 16,
     "terminal.integrated.fontSize": 16,
-    "terminal.integrated.fontFamily": "'DejaVu Sans Mono', Menlo, 'Droid Sans Mono', Monaco, 'Courier New', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'Ubuntu Monospace Regular', 'DejaVu Sans Mono', Menlo, 'Droid Sans Mono', Monaco, 'Courier New', monospace, 'Droid Sans Fallback'",
     "editor.wrappingColumn": 0,
     "editor.rulers": [80],
     "editor.renderWhitespace": "boundary",
