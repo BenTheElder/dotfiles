@@ -1,6 +1,7 @@
 {
     "window.zoomLevel": 0,
     "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
     "editor.wrappingColumn": 0,
     "editor.rulers": [80],
     "editor.renderWhitespace": "boundary",

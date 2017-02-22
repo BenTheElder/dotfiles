@@ -74,8 +74,10 @@ bootstrap_bash()
 symlink_dir()
 {
   if [ -d ${LINK_DIR} ]; then
+    IFS="$(printf '\n\t')" 
     for link_file in $(find -L "${LINK_DIR}" -not -type d); do
       link_target="${HOME}"${link_file#$LINK_DIR}
+      #echo ${link_file} "...." ${link_target};
       (
         set -x;
         ln -s ${link_file} ${link_target};
