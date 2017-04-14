@@ -7,5 +7,11 @@
     "editor.rulers": [80],
     "editor.renderWhitespace": "boundary",
     "editor.scrollBeyondLastLine": false,
-    "workbench.colorTheme": "Visual Studio Dark"
+    "workbench.colorTheme": "Visual Studio Dark",
+    "[cpp]": {
+        "editor.quickSuggestions": false
+    },
+    "[c]": {
+        "editor.quickSuggestions": false
+    }
 }

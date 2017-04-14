@@ -76,7 +76,7 @@ def main():
     print "deleting tarfile"
     os.system("rm "+tar_name)
     # remind user to set $PATH
-    print "make sure: `#export PATH=$PATH:/usr/local/go/bin` is in your bash profile."
+    print "make sure: `export PATH=$PATH:/usr/local/go/bin` is in your bash profile."
 
 if __name__ == "__main__":
     main()
