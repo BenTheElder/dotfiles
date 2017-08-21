@@ -18,7 +18,7 @@ from sys import platform as sys_platform
 import os
 
 def get_go_versions():
-    data = urllib.urlopen('https://go.googlesource.com/go/+refs').read()
+    data = urllib.urlopen('https://storage.googleapis.com/golang/').read()
     res = set()
     for match in re.finditer('go([0-9]+).([0-9]+).([0-9]+)?', data):
         res.add(tuple((int(x) for x in match.groups() if x is not None)))
