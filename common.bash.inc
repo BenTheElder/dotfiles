@@ -1,18 +1,29 @@
 #!/bin/bash
 # ^- this is so that this file is detected as bash
 # this is an include file, not a script.
-
-
+#===============================================================================
+# Aliases
+#===============================================================================
+# reload bash config
+alias re-source="source $HOME/.bashrc"
+# https://stackoverflow.com/a/21148981
+alias git-fixlast="git commit -a --fixup=HEAD && GIT_EDITOR=true git rebase -i --autosquash HEAD~2"
+alias nyan='telnet -e ^c nyancat.dakko.us'
+#===============================================================================
+# Environment Settings
+#===============================================================================
+# git rid of all those pesky --set-upstream
+git config --global push.default current
 # this is all I want when editing a commit message etc.
 # other editors can be opened explicitly
 export EDITOR=nano
-
+#===============================================================================
+# Shell settings
+#===============================================================================
 # ls colors
 export LSCOLORS=ExFxCxDxBxegedabagacad
-
 # colors
 export CLICOLOR=1
-
 # Formatting
 DEFAULT="\[$(tput sgr0)$(tput rmso)\]"
 BOLD="\[$(tput bold)\]"
@@ -47,7 +58,6 @@ BG_BLUE256="\[$(tput setab 33)\]"
 BG_RED256="\[$(tput setab 160)\]"
 BG_YELLOW256="\[$(tput setab 178)\]"
 BG_GREEN256="\[$(tput setab 34)\]"
-
 # custom PS1
 PS1="${DEFAULT}\n${BOLD}"
 PS1+="${BG_WHITE}${BLACK256}["
