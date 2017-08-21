@@ -18,7 +18,7 @@ export PATH=$PATH:$GOPATH/bin
 #===============================================================================
 # - BASH -
 # reload bash config
-alias re-source="source $HOME/.bashrc & source $HOME/dotfiles/.bashrc.common.inc"
+alias re-source="source $HOME/.bashrc && source $HOME/dotfiles/.bashrc.common.inc"
 # - SCREEN -
 alias s="screen -dRL"
 # - GIT -
