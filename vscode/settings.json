@@ -8,10 +8,7 @@
     "editor.renderWhitespace": "boundary",
     "editor.scrollBeyondLastLine": false,
     "workbench.colorTheme": "Visual Studio Dark",
-    "[cpp]": {
-        "editor.quickSuggestions": false
-    },
-    "[c]": {
-        "editor.quickSuggestions": false
-    }
+    "workbench.iconTheme": "vs-seti",
+    "explorer.autoReveal": false,
+    "python.linting.enabled": false
 }

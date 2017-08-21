@@ -32,7 +32,7 @@ bootstrap_bash()
 {
   common_bash_inc="${DIR}/common.bash.inc"
   # canary line
-  LINE="if [ -f ${common_bash_inc} ]; then"
+  LINE="# source common settings from dotfiles"
   # files to check
   bash_files[0]=${HOME}"/.bash_profile"
   bash_files[1]=${HOME}"/.bashrc"
@@ -51,7 +51,7 @@ bootstrap_bash()
         set -x;
         echo "" >> ${FILE};
         echo "# source common settings from dotfiles" >> ${FILE};
-        echo ${LINE} >> ${FILE};
+        echo "if [ -f ${common_bash_inc} ]; then" >> ${FILE};
         echo "  source ${common_bash_inc}" >> ${FILE};
         echo "fi" >> ${FILE};
         echo "" >> ${FILE};
