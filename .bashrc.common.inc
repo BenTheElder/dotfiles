@@ -2,14 +2,6 @@
 # ^- this is so that this file is detected as bash
 # this is an include file, not a script.
 #===============================================================================
-# Aliases
-#===============================================================================
-# reload bash config
-alias re-source="source $HOME/.bashrc"
-# https://stackoverflow.com/a/21148981
-alias git-fixlast="git commit -a --fixup=HEAD && GIT_EDITOR=true git rebase -i --autosquash HEAD~2"
-alias nyan='telnet -e ^c nyancat.dakko.us'
-#===============================================================================
 # Environment Settings
 #===============================================================================
 # git rid of all those pesky --set-upstream
@@ -17,6 +9,27 @@ git config --global push.default current
 # this is all I want when editing a commit message etc.
 # other editors can be opened explicitly
 export EDITOR=nano
+# GOLANG
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+#===============================================================================
+# Aliases
+#===============================================================================
+# - BASH -
+# reload bash config
+alias re-source="source $HOME/.bashrc & source $HOME/dotfiles/.bashrc.common.inc"
+# - SCREEN -
+alias s="screen -dRL"
+# - GIT -
+# https://stackoverflow.com/a/21148981
+alias git-fixlast="git commit -a --fixup=HEAD && GIT_EDITOR=true git rebase -i --autosquash HEAD~2"
+alias git-sync-upstream-master="git fetch upstream && git checkout master && git reset --hard upstream/master && git push origin"
+alias git-cleanup-branches="git checkout master; git pull origin master; git fetch --all -p; git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d"
+# - GVM -
+alias gvm-use='gvm use $@; export GOPATH=~/go'
+# - FUN -
+alias nyan='telnet -e ^c nyancat.dakko.us'
 #===============================================================================
 # Shell settings
 #===============================================================================
