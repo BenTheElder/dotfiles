@@ -30,7 +30,7 @@ line_present()
 #######################################
 bootstrap_bash()
 {
-  common_bash_inc="${DIR}/bashrc.common.inc"
+  common_bash_inc="${DIR}/.bashrc.common.inc"
   # canary line
   LINE="# source common settings from dotfiles"
   # files to check
