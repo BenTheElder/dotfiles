@@ -10,5 +10,10 @@
     "workbench.colorTheme": "Visual Studio Dark",
     "workbench.iconTheme": "vs-seti",
     "explorer.autoReveal": false,
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/bazel-*/": true
+    }
 }
