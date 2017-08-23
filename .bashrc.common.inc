@@ -29,7 +29,7 @@ alias git-cleanup-branches="git checkout master; git pull origin master; git fet
 # - DOCKER - 
 alias docker-stop-all="docker stop $(docker ps -a -q)"
 alias docker-rm-all="docker rm $(docker ps -a -q)"
-alias docker-rmi-all="docker rmi $(docker ps -q)"
+alias docker-rmi-all="docker rmi $(docker ps -a -q)"
 # - GVM -
 alias gvm-use='gvm use $@; export GOPATH=~/go'
 # - FUN -
