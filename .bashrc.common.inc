@@ -32,6 +32,8 @@ alias docker-rm-all="docker ps -a -q | xargs docker rm"
 alias docker-rmi-all="docker images -f dangling=true -q | xargs docker rmi"
 # - GVM -
 alias gvm-use='gvm use $@; export GOPATH=~/go'
+# - PYTHON -
+alias rm-pyc="find . -name \*.pyc -delete"
 # - FUN -
 alias nyan='telnet -e ^c nyancat.dakko.us'
 #===============================================================================
