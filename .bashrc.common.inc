@@ -27,9 +27,9 @@ alias git-fixlast="git commit -a --fixup=HEAD && GIT_EDITOR=true git rebase -i -
 alias git-sync-upstream-master="git fetch upstream && git checkout master && git reset --hard upstream/master && git push origin"
 alias git-cleanup-branches="git checkout master; git pull origin master; git fetch --all -p; git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d"
 # - DOCKER - 
-alias docker-stop-all="docker stop `docker ps -a -q`"
-alias docker-rm-all="docker rm `docker ps -a -q`"
-alias docker-rmi-all="docker rmi `docker images -f dangling=true -q`"
+alias docker-stop-all="docker ps -a -q | xargs docker stop"
+alias docker-rm-all="docker ps -a -q | xargs docker rm"
+alias docker-rmi-all="docker images -f dangling=true -q | xargs docker rmi"
 # - GVM -
 alias gvm-use='gvm use $@; export GOPATH=~/go'
 # - FUN -
@@ -37,12 +37,16 @@ alias nyan='telnet -e ^c nyancat.dakko.us'
 #===============================================================================
 # Shell settings
 #===============================================================================
+# fix colors
+if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi
 # ls colors
 export LSCOLORS=ExFxCxDxBxegedabagacad
 # colors
 export CLICOLOR=1
 # Formatting
-DEFAULT="\[$(tput sgr0)$(tput rmso)\]"
+DEFAULT="\[$(tput sgr0)\]\[$(tput rmso)\]"
 BOLD="\[$(tput bold)\]"
 STANDOUT="\[$(tput smso)\]"
 # define colors
