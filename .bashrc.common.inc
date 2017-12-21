@@ -43,6 +43,13 @@ alias nyan='telnet -e ^c nyancat.dakko.us'
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
+# fix gnome keyring over ssh
+if [[ -z $DBUS_SESSION_BUS_ADDRESS ]]; then
+    if [[ -f ~/.dbus/session-bus/$(dbus-uuidgen --get)-0 ]]; then
+        source ~/.dbus/session-bus/$(dbus-uuidgen --get)-0
+        export DBUS_SESSION_BUS_ADDRESS
+    fi
+fi
 # ls colors
 export LSCOLORS=ExFxCxDxBxegedabagacad
 # colors
