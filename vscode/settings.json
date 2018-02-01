@@ -5,7 +5,9 @@
     "terminal.integrated.fontFamily": "'Ubuntu Monospace Regular', 'DejaVu Sans Mono', Menlo, 'Droid Sans Mono', Monaco, 'Courier New', monospace, 'Droid Sans Fallback'",
     "editor.formatOnSave": true,
     "editor.wordWrap": "on",
-    "editor.rulers": [80],
+    "editor.rulers": [
+        80
+    ],
     "editor.renderWhitespace": "boundary",
     "editor.scrollBeyondLastLine": false,
     "workbench.colorTheme": "Visual Studio Dark",
@@ -16,5 +18,8 @@
         "**/node_modules": true,
         "**/bower_components": true,
         "**/bazel-*/": true
+    },
+    "[dockerfile]": {
+        "editor.formatOnSave": false,
     }
 }
