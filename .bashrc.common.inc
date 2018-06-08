@@ -14,7 +14,7 @@ export EDITOR=nano
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 #===============================================================================
-# Aliases
+# Aliases and Functions
 #===============================================================================
 # - BASH -
 # reload bash config
@@ -25,6 +25,7 @@ alias s="screen -dRL"
 # https://stackoverflow.com/a/21148981
 alias git-fixlast="git commit -a --fixup=HEAD && GIT_EDITOR=true git rebase -i --autosquash HEAD~2"
 alias git-sync-upstream-master="git fetch upstream && git checkout master && git reset --hard upstream/master && git push origin"
+function github-checkout-upstream-pr(){ git fetch upstream "pull/$@/head:pr$@" && git checkout "pr$@"; }
 alias git-cleanup-branches="git checkout master; git pull origin master; git fetch --all -p; git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d"
 # - DOCKER - 
 alias docker-stop-all="docker ps -a -q | xargs docker stop"
