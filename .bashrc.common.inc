@@ -19,6 +19,8 @@ export PATH=$PATH:$GOPATH/bin
 # - BASH -
 # reload bash config
 alias re-source="source $HOME/.bashrc && source $HOME/dotfiles/.bashrc.common.inc"
+# for disabling bracketed paste mode
+alias bracketed-paste-off="printf "\e[?2004l""
 # - SCREEN -
 alias s="screen -dRL"
 # - GIT -
@@ -103,7 +105,4 @@ PS1+="${BLACK256}${BG_WHITE}]"
 PS1+="${DEFAULT}"
 PS1+="${DEFAULT}${WHITE}${BOLD}\n$"
 PS1+="${DEFAULT}${WHITE} "
-# hack to disable annoying bracketed paste mode
-# TODO(bentheelder): there are probably better options
-PS1+="$(printf "\e[?2004l")"
 export PS1;
