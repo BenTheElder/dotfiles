@@ -45,7 +45,7 @@ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
 # fix gnome keyring over ssh
-if [[ -n $(command -v dbus-uuidgen) ]];
+if [[ -n $(command -v dbus-uuidgen) ]]; then
     if [[ -z $DBUS_SESSION_BUS_ADDRESS ]]; then
         if [[ -f ~/.dbus/session-bus/$(dbus-uuidgen --get)-0 ]]; then
             source ~/.dbus/session-bus/$(dbus-uuidgen --get)-0
