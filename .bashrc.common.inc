@@ -105,5 +105,5 @@ PS1+="${DEFAULT}${WHITE}${BOLD}\n$"
 PS1+="${DEFAULT}${WHITE} "
 # hack to disable annoying bracketed paste mode
 # TODO(bentheelder): there are probably better options
-PS1+=$(printf "\e[?2004l")"
+PS1+="$(printf "\e[?2004l")"
 export PS1;
