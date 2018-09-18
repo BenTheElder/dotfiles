@@ -80,7 +80,7 @@ symlink_dir()
       #echo ${link_file} "...." ${link_target};
       (
         set -x;
-        ln -s ${link_file} ${link_target};
+        ln -sf ${link_file} ${link_target};
       )
     done
   fi
