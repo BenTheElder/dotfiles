@@ -45,10 +45,12 @@ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
 # fix gnome keyring over ssh
-if [[ -z $DBUS_SESSION_BUS_ADDRESS ]]; then
-    if [[ -f ~/.dbus/session-bus/$(dbus-uuidgen --get)-0 ]]; then
-        source ~/.dbus/session-bus/$(dbus-uuidgen --get)-0
-        export DBUS_SESSION_BUS_ADDRESS
+if [[ -n $(command -v dbus-uuidgen) ]];
+    if [[ -z $DBUS_SESSION_BUS_ADDRESS ]]; then
+        if [[ -f ~/.dbus/session-bus/$(dbus-uuidgen --get)-0 ]]; then
+            source ~/.dbus/session-bus/$(dbus-uuidgen --get)-0
+            export DBUS_SESSION_BUS_ADDRESS
+        fi
     fi
 fi
 # ls colors
@@ -101,4 +103,7 @@ PS1+="${BLACK256}${BG_WHITE}]"
 PS1+="${DEFAULT}"
 PS1+="${DEFAULT}${WHITE}${BOLD}\n$"
 PS1+="${DEFAULT}${WHITE} "
+# hack to disable annoying bracketed paste mode
+# TODO(bentheelder): there are probably better options
+PS1+=$(printf "\e[?2004l")"
 export PS1;
