@@ -12,7 +12,7 @@
     "editor.scrollBeyondLastLine": false,
     "workbench.colorTheme": "Visual Studio Dark",
     "workbench.iconTheme": "vs-seti",
-    "explorer.autoReveal": true,
+    "explorer.autoReveal": false,
     "python.linting.enabled": false,
     "search.exclude": {
         "**/node_modules": true,
