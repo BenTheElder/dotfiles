@@ -74,10 +74,11 @@ CYAN="\[$(tput setaf 6)\]"
 BLUE256="\[$(tput setaf 20)\]"
 LBLUE256="\[$(tput setaf 33)\]"
 GREEN256="\[$(tput setaf 71)\]"
+LGREEN256="\[$(tput setaf 34)\]"
 BLACK256="\[$(tput setaf 232)\]"
 GRAY256="\[$(tput setaf 239)\]"
 YELLOW256="\[$(tput setaf 178)\]"
-RED256="\[$(tput setaf 160)\]"
+RED256="\[$(tput setaf 124)\]"
 WHITE256="\[$(tput setaf 255)\]"
 # more colors
 BG_BLACK="\[$(tput setab 0)\]"
@@ -93,16 +94,31 @@ BG_BLUE256="\[$(tput setab 33)\]"
 BG_RED256="\[$(tput setab 160)\]"
 BG_YELLOW256="\[$(tput setab 178)\]"
 BG_GREEN256="\[$(tput setab 34)\]"
+# git status for PS1
+__git_ps1() {
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo -ne "$(tput setaf 7)·"
+        echo -ne "$(tput setaf 33)$(git symbolic-ref -q --short HEAD)"
+        echo -ne "$(tput setaf 124)@"
+        echo -ne "$(tput setaf 178)$(git rev-parse --short HEAD)"
+        echo -e "$(tput setaf 7)"
+    fi
+}
 # custom PS1
-PS1="${DEFAULT}\n${BOLD}"
-PS1+="${BG_WHITE}${BLACK256}["
-PS1+="${WHITE256}${BG_BLUE256} \u "
-PS1+="${BG_RED256} @ "
-PS1+="${BG_YELLOW256} \H "
-PS1+="${BG_BLUE256} : "
-PS1+="${BG_GREEN256} \w "
-PS1+="${BLACK256}${BG_WHITE}]"
-PS1+="${DEFAULT}"
-PS1+="${DEFAULT}${WHITE}${BOLD}\n$"
+PS1="${DEFAULT}\n"
+PS1+="${WHITE}${BOLD}("
+PS1+="${LBLUE256}\u"
+PS1+="${RED256}@"
+PS1+="${YELLOW256}\H"
+PS1+="${LBLUE256}:"
+PS1+="${LGREEN256}\w"
+PS1+="${WHITE}·"
+PS1+="${LBLUE256}"
+PS1+='$(date +%Y-%m-%d)'
+PS1+="${RED256}T${YELLOW256}"
+PS1+='$(date +%T%z)'
+PS1+="${WHITE}"
+PS1+='$(__git_ps1)'
+PS1+="${DEFAULT}${WHITE})${BOLD}\n$"
 PS1+="${DEFAULT}${WHITE} "
 export PS1;
