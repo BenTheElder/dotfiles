@@ -106,7 +106,7 @@ __git_ps1() {
 }
 # custom PS1
 PS1="${DEFAULT}\n"
-PS1+="${WHITE}${BOLD}("
+PS1+="${WHITE}${BOLD}["
 PS1+="${LBLUE256}\u"
 PS1+="${RED256}@"
 PS1+="${YELLOW256}\h"
@@ -119,6 +119,6 @@ PS1+="${RED256}T${YELLOW256}"
 PS1+='$(date +%T%z)'
 PS1+="${WHITE}"
 PS1+='$(__git_ps1)'
-PS1+="${DEFAULT}${WHITE})${BOLD}\n$"
+PS1+="${DEFAULT}${WHITE}]${BOLD}\n$"
 PS1+="${DEFAULT}${WHITE} "
 export PS1;
