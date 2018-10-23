@@ -120,5 +120,5 @@ PS1+='$(date +%T%z)'
 PS1+="${WHITE}"
 PS1+='$(__git_ps1)'
 PS1+="${WHITE}]${BOLD}\n${DEFAULT}${WHITE}$"
-PS1+="${DEFAULT}${WHITE} "
+PS1+="${DEFAULT} "
 export PS1;
