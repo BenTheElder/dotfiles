@@ -1,5 +1,5 @@
 {
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 0.001,
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 14.001,
     "terminal.integrated.fontFamily": "'Ubuntu Monospace Regular', 'DejaVu Sans Mono', Menlo, 'Droid Sans Mono', Monaco, 'Courier New', monospace, 'Droid Sans Fallback'",
