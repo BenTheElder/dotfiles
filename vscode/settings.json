@@ -1,7 +1,7 @@
 {
-    "window.zoomLevel": 0.001,
+    "window.zoomLevel": 0,
     "editor.fontSize": 14,
-    "terminal.integrated.fontSize": 14.001,
+    "terminal.integrated.fontSize": 16.001,
     "terminal.integrated.fontFamily": "'Ubuntu Monospace Regular', 'DejaVu Sans Mono', Menlo, 'Droid Sans Mono', Monaco, 'Courier New', monospace, 'Droid Sans Fallback'",
     "editor.formatOnSave": true,
     "editor.wordWrap": "on",
@@ -17,7 +17,7 @@
         "**/bower_components": true,
         "**/bazel-*/": true
     },
-    "go.formatTool": "goimports",
+    "go.formatTool": "gofmt",
     "go.useLanguageServer": true,
     "go.toolsEnvVars": {
         "GO111MODULE": "on",
