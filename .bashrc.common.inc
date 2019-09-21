@@ -20,7 +20,7 @@ export PATH=$PATH:$GOPATH/bin
 # reload bash config
 alias re-source="source $HOME/.bashrc && source $HOME/dotfiles/.bashrc.common.inc"
 # for disabling bracketed paste mode
-alias bracketed-paste-off="printf "\e[?2004l""
+alias bracketed-paste-off='printf "\e[?2004h"'
 # - SCREEN -
 alias s="screen -dRL"
 # - GIT -
