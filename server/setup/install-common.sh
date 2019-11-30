@@ -12,4 +12,4 @@ add-apt-repository contrib
 # update and then install utils
 apt update
 # TODO ...
-#apt install -y --no-install-recommends
+apt install -y --no-install-recommends curl
