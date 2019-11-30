@@ -13,7 +13,7 @@ disable_sleep() {
 # installs some common packages
 install_basic_packages() {
   apt update
-  apt install -y --no-reccommends git
+  apt install -y --no-install-recommends git
 }
 
 configure_unattended_updates() {
@@ -46,7 +46,7 @@ EOF
 install_docker() {
   # see https://docs.docker.com/install/linux/docker-ce/debian/
   apt update
-  apt install -y --no-reccommends apt-transport-https \
+  apt install -y --no-install-recommends apt-transport-https \
     ca-certificates \
     curl \
     gnupg2 \
