@@ -9,7 +9,6 @@ set -o pipefail
 add-apt-repository non-free
 add-apt-repository contrib
 
-# update and then install utils, do not fail on update
+# update and then install utils, do not fail on
 apt update || echo "WARNING failed to update apt"
-# TODO ...
 apt install -y --no-install-recommends curl
