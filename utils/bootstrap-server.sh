@@ -21,7 +21,7 @@ configure_unattended_updates() {
 cat <<EOF >/etc/apt/apt.conf.d/50unattended-upgrades
 Unattended-Upgrade::Origins-Pattern {
         // auto-upgrade all the things
-        "origin=*"
+        "origin=*";
 }
 
 // cleanup unused dependencies
