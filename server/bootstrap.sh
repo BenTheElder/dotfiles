@@ -9,7 +9,7 @@ run_script_traced() {
 
 # this scipt bootstraps my typical debian server setup
 set -x;
-SCRIPT_DIR="$(cd "${BASH_SOURCE[0]}"; && pwd -P)"
+SCRIPT_DIR="$(cd "${BASH_SOURCE[0]}" && pwd -P)"
 SCRIPTS="${SCRIPTS_DIR}/setup"
 run_script_traced "${SCRIPTS}"/install-common.sh
 run_script_traced "${SCRIPTS}"/automatic-upgrades.sh
