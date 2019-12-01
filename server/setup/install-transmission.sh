@@ -8,7 +8,9 @@ set -o pipefail
 apt update
 apt install transmission-daemon
 
-cat <<EOF >/etc/systemd/system/transmission-daemon.service.d/10-user.conf
+TRANSMISSION_USER_DROPIN="/etc/systemd/system/transmission-daemon.service.d/10-user.conf"
+mkdir -p "$(dirname "${TRANSMISSION_USER_DROPIN}")"
+cat <<EOF >"${TRANSMISSION_USER_DROPIN}"
 User=${ORIGINAL_USER}
 EOF
 
