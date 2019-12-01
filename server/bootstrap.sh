@@ -8,9 +8,11 @@ run_script_traced() {
 }
 
 elevate() {
+  # elevate to root once and re-run self
   if [ $UID -ne 0 ]; then
     export ORIGINAL_USER="${USER}"
     su root "${BASH_SOURCE[0]}"
+    exit
   fi
 }
 
