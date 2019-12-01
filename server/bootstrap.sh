@@ -10,7 +10,7 @@ run_script_traced() {
 elevate() {
   if [ $UID -ne 0 ]; then
     export ORIGINAL_USER="${USER}"
-    su "${BASH_SOURCE[0]}"
+    su root "${BASH_SOURCE[0]}"
   fi
 }
 
