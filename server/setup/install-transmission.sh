@@ -22,14 +22,14 @@ User=${ORIGINAL_USER}
 EOF
 
 # only bind the web ui to localhost
-sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's/"rpc-bind-address":.*/"rpc-bind-address": "127.0.0.1",'
+sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's#"rpc-bind-address":.*#"rpc-bind-address": "127.0.0.1",#'
 
 # disable dht and pex, we'll be using our own trackers / peers
-sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's/"dht-enabled":.*/"dht-enabled": false,'
-sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's/"pex-enabled":.*/"pex-enabled": false,'
+sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's#"dht-enabled":.*#"dht-enabled": false,#'
+sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's#"pex-enabled":.*#"pex-enabled": false,#'
 
 # set download dir
-sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's/"download-dir":.*/"download-dir": "'"${TRANSMISSION_DOWNLOAD_DIR}"'",'
+sed -i "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json 's#"download-dir":.*#"download-dir": "'"${TRANSMISSION_DOWNLOAD_DIR}"'",#'
 
 # restart transmission with latest settings
 systemctl daemon-reload
