@@ -31,6 +31,13 @@ sed -i 's#"pex-enabled":.*#"pex-enabled": false,#' "${ORIGINAL_HOME}"/.config/tr
 # set download dir
 sed -i 's#"download-dir":.*#"download-dir": "'"${TRANSMISSION_DOWNLOAD_DIR}"'",#' "${ORIGINAL_HOME}"/.config/transmission-daemon/settings.json
 
+# ensure /etc/hosts entry for checking if port is open
+# https://github.com/transmission/transmission/issues/407#issuecomment-377573705
+portcheck_host_line='87.98.162.88 portcheck.transmissionbt.com'
+if ! grep -Fxq "${portcheck_host_line}" /etc/hosts; then
+  echo "${portcheck_host_line}" >> /etc/hosts
+fi
+
 # restart transmission with latest settings
 systemctl daemon-reload
 systemctl start transmission-daemon
