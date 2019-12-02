@@ -6,7 +6,7 @@ set -x;
 # zero pad season / episode
 SEASON="$(printf '%02d' "${SEASON:?}")"
 EPISODE="$(printf '%02d' "${EPISODE:?}")"
-BASEDIR="${BASEDIR:-"/mnt/storage/plex/tv/"}"
+BASEDIR="${BASEDIR:-"/mnt/storage/plex/tv"}"
 
 # call ydl.sh with download location based on $SHOW, $SEASON, $EPISODE
-"${SCRIPT_DIR}/ydl.sh" "--output=${SHOW:?}/Season ${SEASON:?}/${SHOW:?} - s${SEASON:?}e${EPISODE:?}.%(ext)s" "$@"
+"${SCRIPT_DIR}/ydl.sh" "--output=${BASEDIR}/${SHOW:?}/Season ${SEASON:?}/${SHOW:?} - s${SEASON:?}e${EPISODE:?}.%(ext)s" "$@"
