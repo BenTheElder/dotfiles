@@ -26,5 +26,6 @@
     "python.linting.enabled": false,
     "[dockerfile]": {
         "editor.formatOnSave": false,
-    }
+    },
+    "html.format.enable": false
 }
