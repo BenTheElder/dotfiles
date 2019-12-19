@@ -10,6 +10,7 @@ These scripts assume my user is `bentheelder`.
 TODO:
 - automate configuring grub with timeout = 0
 - automate installing nvidia drivers
+ - make sure to install `libnvidia-encode1`
 - automate mounting storage disks?
 - automate plex configuration
 
