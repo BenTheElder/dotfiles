@@ -16,7 +16,7 @@ apt update || echo "WARNING failed to update apt"
 
 # install kernel headers and zfs
 # https://wiki.debian.org/ZFS#Installation
-apt install -y --no-install-recommends "linux-headers-$(uname -r)"
-apt install -y --no-install-recommends -t "${codename_backports:?}" \
+apt install -yq --no-install-recommends "linux-headers-$(uname -r)"
+apt install -yq --no-install-recommends -t "${codename_backports:?}" \
     dkms spl-dkms \
     zfs-dkms zfsutils-linux
