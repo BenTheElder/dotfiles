@@ -4,6 +4,7 @@ set -o nounset
 set -o pipefail
 
 # this script installs and configures the transmission torrent service
+export DEBIAN_FRONTEND=noninteractive
 # TODO: make this configurable
 TRANSMISSION_DOWNLOAD_DIR="/mnt/storage/plex/download"
 

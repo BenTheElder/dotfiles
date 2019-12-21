@@ -5,6 +5,7 @@ set -o pipefail
 
 
 # this script installs docker
+export DEBIAN_FRONTEND=noninteractive
 
 # see https://docs.docker.com/install/linux/docker-ce/debian/
 apt update

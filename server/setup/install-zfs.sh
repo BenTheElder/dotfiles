@@ -3,7 +3,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# this script installs some common utilities
+# this script installs zfs
+export DEBIAN_FRONTEND=noninteractive
 
 # enable backports for zfs
 codename_backports="$(lsb_release -cs)-backports"

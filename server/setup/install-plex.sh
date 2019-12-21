@@ -4,6 +4,8 @@ set -o nounset
 set -o pipefail
 
 # this script installs the plex media server
+export DEBIAN_FRONTEND=noninteractive
+
 # https://support.plex.tv/articles/235974187-enable-repository-updating-for-supported-linux-server-distributions/
 
 echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
