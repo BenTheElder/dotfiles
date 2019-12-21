@@ -23,6 +23,7 @@ elevate
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 SCRIPTS="${SCRIPT_DIR}/setup"
 run_script_traced "${SCRIPTS}"/install-common.sh
+run_script_traced "${SCRIPTS}"/install-zfs.sh
 run_script_traced "${SCRIPTS}"/automatic-upgrades.sh
 run_script_traced "${SCRIPTS}"/disable-sleep.sh
 run_script_traced "${SCRIPTS}"/install-plex.sh

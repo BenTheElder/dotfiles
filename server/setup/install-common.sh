@@ -11,4 +11,6 @@ add-apt-repository contrib
 
 # update and then install utils, do not fail on
 apt update || echo "WARNING failed to update apt"
-apt install -y --no-install-recommends curl
+apt install -y --no-install-recommends \
+    curl \
+    software-properties-common
