@@ -16,4 +16,23 @@ TODO:
 
 ## Notes
 
-- Gnome Disks was used to configure the storage disk to mount to /mnt/storage
+- Gnome Disks was used to configure the first storage disk to mount to /mnt/storage
+
+### ZFS Setup
+
+```
+# identify disks for creating the pool
+/sbin/fdisk -l
+
+# create the pool (raidz ~= RAID 5)
+zpool create -o ashift=12 tank raidz \
+  /dev/disk/by-id/ata-WDC_WD100EMAZ-00WJTA0_1EGEEYKZ \
+  /dev/disk/by-id/ata-WDC_WD100EMAZ-00WJTA0_1EGG2RVZ \
+  /dev/disk/by-id/ata-WDC_WD100EMAZ-00WJTA0_JEK6RT9N
+
+# create filesystem and set mountpoint
+zfs create -o mountpoint=/mnt/storage tank/storage
+
+# enable compression
+zfs set compression=lz4 tank
+```
