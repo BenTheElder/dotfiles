@@ -14,4 +14,5 @@ add-apt-repository contrib
 apt update || echo "WARNING failed to update apt"
 apt install -y --no-install-recommends \
     curl \
-    software-properties-common
+    software-properties-common \
+    rsync
