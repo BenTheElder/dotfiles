@@ -20,12 +20,11 @@
     "go.formatTool": "gofmt",
     "go.useLanguageServer": true,
     "go.toolsEnvVars": {
-        "GO111MODULE": "on",
-        "GOFLAGS": "-mod=vendor"
+        "GO111MODULE": "on"
     },
     "python.linting.enabled": false,
     "[dockerfile]": {
-        "editor.formatOnSave": false,
+        "editor.formatOnSave": false
     },
     "html.format.enable": false
 }
