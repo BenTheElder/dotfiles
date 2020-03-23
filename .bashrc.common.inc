@@ -105,7 +105,7 @@ __git_ps1() {
     fi
 }
 # custom PS1
-PS1="${DEFAULT}\n"
+PS1="${DEFAULT}"
 PS1+="${WHITE}${BOLD}["
 PS1+="${LBLUE256}\u"
 PS1+="${RED256}@"
