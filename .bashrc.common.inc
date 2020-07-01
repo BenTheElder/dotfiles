@@ -2,6 +2,15 @@
 # ^- this is so that this file is detected as bash
 # this is an include file, not a script.
 #===============================================================================
+# zsh fixes
+#===============================================================================
+if [ -n "$ZSH_VERSION" ]; then
+    autoload bashcompinit
+    bashcompinit
+    # for PS1
+    set -o PROMPT_SUBST
+fi
+#===============================================================================
 # Environment Settings
 #===============================================================================
 # git rid of all those pesky --set-upstream
@@ -34,11 +43,7 @@ alias docker-stop-all="docker ps -a -q | xargs docker stop"
 alias docker-rm-all="docker ps -a -q | xargs docker rm"
 alias docker-rmi-all="docker images -f dangling=true -q | xargs docker rmi"
 # - GVM -
-gvm-use() {
-    local gopath=${GOPATH};
-    gvm use "$@"
-    export GOPATH=${gopath}
-}
+function gvm-use(){ gopath=${GOPATH}; gvm use "$@"; export GOPATH=${gopath}; }
 export -f gvm-use
 # - PYTHON -
 alias rm-pyc="find . -name \*.pyc -delete"
@@ -48,7 +53,7 @@ alias nyan='telnet -e ^c nyancat.dakko.us'
 # Shell settings
 #===============================================================================
 # fix colors
-if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+if [ -n "$DISPLAY" ] && [ "$TERM" = "xterm" ]; then
     export TERM=xterm-256color
 fi
 # fix gnome keyring over ssh
@@ -65,40 +70,40 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 # colors
 export CLICOLOR=1
 # Formatting
-DEFAULT="\[$(tput sgr0)\]\[$(tput rmso)\]"
-BOLD="\[$(tput bold)\]"
-STANDOUT="\[$(tput smso)\]"
+DEFAULT="$(tput sgr0)$(tput rmso)"
+BOLD="$(tput bold)"
+STANDOUT="$(tput smso)"
 # define colors
-WHITE="\[$(tput setaf 7)\]"
-BLACK="\[$(tput setaf 0)\]"
-RED="\[$(tput setaf 1)\]"
-GREEN="\[$(tput setaf 2)\]"
-YELLOW="\[$(tput setaf 3)\]"
-BLUE="\[$(tput setaf 4)\]"
-CYAN="\[$(tput setaf 6)\]"
-BLUE256="\[$(tput setaf 20)\]"
-LBLUE256="\[$(tput setaf 33)\]"
-GREEN256="\[$(tput setaf 71)\]"
-LGREEN256="\[$(tput setaf 34)\]"
-BLACK256="\[$(tput setaf 232)\]"
-GRAY256="\[$(tput setaf 239)\]"
-YELLOW256="\[$(tput setaf 178)\]"
-RED256="\[$(tput setaf 124)\]"
-WHITE256="\[$(tput setaf 255)\]"
+WHITE="$(tput setaf 7)"
+BLACK="$(tput setaf 0)"
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+YELLOW="$(tput setaf 3)"
+BLUE="$(tput setaf 4)"
+CYAN="$(tput setaf 6)"
+BLUE256="$(tput setaf 20)"
+LBLUE256="$(tput setaf 33)"
+GREEN256="$(tput setaf 71)"
+LGREEN256="$(tput setaf 34)"
+BLACK256="$(tput setaf 232)"
+GRAY256="$(tput setaf 239)"
+YELLOW256="$(tput setaf 178)"
+RED256="$(tput setaf 124)"
+WHITE256="$(tput setaf 255)"
 # more colors
-BG_BLACK="\[$(tput setab 0)\]"
-BG_WHITE="\[$(tput setab 7)\]"
-BG_BLACK="\[$(tput setab 0)\]"
-BG_RED="\[$(tput setab 1)\]"
-BG_GREEN="\[$(tput setab 2)\]"
-BG_YELLOW="\[$(tput setab 3)\]"
-BG_BLUE="\[$(tput setab 4)\]"
-BT_LBLUE="\[$(tput setab 33)\]"
-BT_CYAN="\[$(tput setab 6)\]"
-BG_BLUE256="\[$(tput setab 33)\]"
-BG_RED256="\[$(tput setab 160)\]"
-BG_YELLOW256="\[$(tput setab 178)\]"
-BG_GREEN256="\[$(tput setab 34)\]"
+BG_BLACK="$(tput setab 0)"
+BG_WHITE="$(tput setab 7)"
+BG_BLACK="$(tput setab 0)"
+BG_RED="$(tput setab 1)"
+BG_GREEN="$(tput setab 2)"
+BG_YELLOW="$(tput setab 3)"
+BG_BLUE="$(tput setab 4)"
+BT_LBLUE="$(tput setab 33)"
+BT_CYAN="$(tput setab 6)"
+BG_BLUE256="$(tput setab 33)"
+BG_RED256="$(tput setab 160)"
+BG_YELLOW256="$(tput setab 178)"
+BG_GREEN256="$(tput setab 34)"
 # git status for PS1
 __git_ps1() {
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
