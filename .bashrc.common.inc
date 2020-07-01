@@ -34,7 +34,12 @@ alias docker-stop-all="docker ps -a -q | xargs docker stop"
 alias docker-rm-all="docker ps -a -q | xargs docker rm"
 alias docker-rmi-all="docker images -f dangling=true -q | xargs docker rmi"
 # - GVM -
-alias gvm-use='gvm use $@; export GOPATH=~/go'
+gvm-use() {
+    local gopath=${GOPATH};
+    gvm use "$@"
+    export GOPATH=${gopath}
+}
+export -f gvm-use
 # - PYTHON -
 alias rm-pyc="find . -name \*.pyc -delete"
 # - FUN -
