@@ -72,6 +72,7 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export CLICOLOR=1
 # Formatting
 tput() {
+    # in zsh don't wrap with \[\]
     [ -n "$ZSH_VERSION" ] || echo -n "\["
     command tput "$@"
     [ -n "$ZSH_VERSION" ] || echo -n "\]"
@@ -120,6 +121,9 @@ __git_ps1() {
         echo -e "$(command tput setaf 7)"
     fi
 }
+__pretty_pwd() {
+    pwd | sed "s#$HOME#~#"
+}
 # custom PS1
 PS1="${DEFAULT}"
 PS1+="${WHITE}${BOLD}["
@@ -127,7 +131,8 @@ PS1+="${LBLUE256}${USER}"
 PS1+="${RED256}@"
 PS1+="${YELLOW256}$(hostname -s)"
 PS1+="${LBLUE256}:"
-PS1+="${LGREEN256}"'${PWD/#$HOME/~}'
+PS1+="${LGREEN256}"
+PS1+='$(__pretty_pwd)'
 PS1+="${WHITE}·"
 PS1+="${LBLUE256}"
 PS1+='$(date +%Y-%m-%d)'
