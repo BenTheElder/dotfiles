@@ -9,6 +9,7 @@ if [ -n "$ZSH_VERSION" ]; then
     bashcompinit
     # for PS1
     set -o PROMPT_SUBST
+    setopt prompt_subst
 fi
 #===============================================================================
 # Environment Settings
@@ -70,6 +71,11 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 # colors
 export CLICOLOR=1
 # Formatting
+tput() {
+    [ -n "$ZSH_VERSION" ] || echo -n "\["
+    command tput "$@"
+    [ -n "$ZSH_VERSION" ] || echo -n "\]"
+}
 DEFAULT="$(tput sgr0)$(tput rmso)"
 BOLD="$(tput bold)"
 STANDOUT="$(tput smso)"
@@ -107,21 +113,21 @@ BG_GREEN256="$(tput setab 34)"
 # git status for PS1
 __git_ps1() {
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        echo -ne "$(tput setaf 7)·"
-        echo -ne "$(tput setaf 33)$(git symbolic-ref -q --short HEAD)"
-        echo -ne "$(tput setaf 124)@"
-        echo -ne "$(tput setaf 178)$(git rev-parse --short HEAD)"
-        echo -e "$(tput setaf 7)"
+        echo -ne "$(command tput setaf 7)·"
+        echo -ne "$(command tput setaf 33)$(git symbolic-ref -q --short HEAD)"
+        echo -ne "$(command tput setaf 124)@"
+        echo -ne "$(command tput setaf 178)$(git rev-parse --short HEAD)"
+        echo -e "$(command tput setaf 7)"
     fi
 }
 # custom PS1
 PS1="${DEFAULT}"
 PS1+="${WHITE}${BOLD}["
-PS1+="${LBLUE256}\u"
+PS1+="${LBLUE256}${USER}"
 PS1+="${RED256}@"
-PS1+="${YELLOW256}\h"
+PS1+="${YELLOW256}$(hostname -s)"
 PS1+="${LBLUE256}:"
-PS1+="${LGREEN256}\w"
+PS1+="${LGREEN256}"'${PWD/#$HOME/~}'
 PS1+="${WHITE}·"
 PS1+="${LBLUE256}"
 PS1+='$(date +%Y-%m-%d)'
@@ -129,6 +135,6 @@ PS1+="${RED256}T${YELLOW256}"
 PS1+='$(date +%T%z)'
 PS1+="${WHITE}"
 PS1+='$(__git_ps1)'
-PS1+="${WHITE}]${BOLD}\n${DEFAULT}${WHITE}$"
+PS1+="${WHITE}]${BOLD}"$'\n'"${DEFAULT}${WHITE}$"
 PS1+="${DEFAULT} "
 export PS1;
