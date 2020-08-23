@@ -59,8 +59,8 @@ def __main(args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("takeout-path", help="Path to extracted 'Takeout' directory")
-    parser.add_argument("output-path", help="Path to music library directory to output files too")
+    parser.add_argument("takeout_path", help="Path to extracted 'Takeout' directory")
+    parser.add_argument("output_path", help="Path to music library directory to output files too")
     parser.add_argument("--dry-run", type=bool, help="if set, do not actually take action")
     args = parser.parse_args()
     __main(args)
