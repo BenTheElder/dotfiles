@@ -53,7 +53,7 @@ def __main(args):
         if dry_run:
             continue
         # ensure the directory exists
-        os.makedirs(os.path.dirname(proposed_path))
+        os.makedirs(os.path.dirname(proposed_path), exist_ok=True)
         # copy the file, preserving metdata
         shutil.copy2(file_path, proposed_path)
 
