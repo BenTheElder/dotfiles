@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # a small script to transform files from a takeouts.google.com export of
 # Google Play Music to a plex music library structure, given the pending
 # shutdown of Google Play Music
