@@ -28,7 +28,7 @@ def relative_path_for_metadata(metadata):
 
 def __main(args):
     source_base_dir=args.takeout_path
-    target_dir=args.output_dir
+    target_dir=args.output_path
     dry_run=args.dry_run
     # Music is in ./Google Play Music/Tracks under the extracted Takeout
     data_dir = os.path.join(source_base_dir, "Google Play Music", "Tracks")
