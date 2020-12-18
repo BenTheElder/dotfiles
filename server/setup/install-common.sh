@@ -10,7 +10,7 @@ export DEBIAN_FRONTEND=noninteractive
 add-apt-repository non-free
 add-apt-repository contrib
 
-# update and then install utils, do not fail on
+# update and then install utils, do not fail on update
 apt update || echo "WARNING failed to update apt"
 apt install -y --no-install-recommends \
     curl \
