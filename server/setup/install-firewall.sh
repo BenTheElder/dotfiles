@@ -5,6 +5,8 @@ set -o pipefail
 
 # this script installs persistent iptables rules
 export DEBIAN_FRONTEND=noninteractive
+# debian doesn't have sbin in path but iptables wll be there
+export PATH="/sbin:${PATH}"
 
 add_line_if_not_present() {
     local file_path=$1
