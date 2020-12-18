@@ -11,7 +11,7 @@ export PATH="/sbin:${PATH}"
 add_line_if_not_present() {
     local file_path=$1
     local line=$2
-    grep -qxF "${line}" "${file_path}" || echo "${line}" >> "${file_path}"
+    grep -qxF -- "${line}" "${file_path}" || echo "${line}" >> "${file_path}"
 }
 
 add_iptables_rule_permanently() {
