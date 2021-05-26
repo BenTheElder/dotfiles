@@ -50,4 +50,4 @@ EOF
 systemctl daemon-reload
 
 # upgrade once
-unattended-upgrade -d
+unattended-upgrade -d || true
