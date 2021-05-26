@@ -31,6 +31,7 @@ APT::Periodic::AutocleanInterval "7";
 APT::Periodic::Unattended-Upgrade "1";
 EOF
 
+mkdir -p /etc/systemd/system/apt-daily.timer.d/
 cat <<EOF >/etc/systemd/system/apt-daily.timer.d/override.conf
 [Timer]
 OnCalendar=
@@ -38,6 +39,7 @@ OnCalendar=*-*-* 0,4,8,12,16,20:00
 RandomizedDelaySec=15m
 EOF
 
+mkdir -p /etc/systemd/system/apt-daily.timer.d/
 cat <<EOF >/etc/systemd/system/apt-daily.timer.d/override.conf
 [Timer]
 OnCalendar=
