@@ -28,5 +28,6 @@
     },
     "html.format.enable": false,
     "window.titleBarStyle": "custom",
-    "window.doubleClickIconToClose": false
+    "window.doubleClickIconToClose": false,
+    "terminal.integrated.sendKeybindingsToShell": true
 }
