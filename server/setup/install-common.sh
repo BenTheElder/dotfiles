@@ -15,4 +15,5 @@ apt update || echo "WARNING failed to update apt"
 apt install -y --no-install-recommends \
     curl \
     software-properties-common \
-    rsync
+    rsync \
+    screen
