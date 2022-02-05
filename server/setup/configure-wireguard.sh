@@ -11,13 +11,13 @@ readonly peers_conf_path="/etc/wireguard/${wg_iface}-peers.conf"
 
 # backup existing config to backup if present
 wg_current_conf=""
-if [[ -f "${wg_conf_path}" ]];
+if [[ -f "${wg_conf_path}" ]]; then
     wg_current_conf="$(cat ${wg_confg_path})"
     mv "${wg_conf_path}" "${wg_conf_path}".bak
 fi
 
 # get wireguard private key from current configuration or generate it
-if [[ -n "${wg_current_conf}" ]];
+if [[ -n "${wg_current_conf}" ]]; then
     wg_privkey="$(echo "${wg_current_conf}" | sed -nr 's#PrivateKey *= *([^ ]+)#\1#p')"
 else
     wg_privkey="$(wg genkey)"
