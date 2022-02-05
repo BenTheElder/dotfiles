@@ -8,9 +8,6 @@ export DEBIAN_FRONTEND=noninteractive
 # TODO: make this configurable
 TRANSMISSION_DOWNLOAD_DIR="/mnt/storage/plex/download"
 
-apt update
-apt install transmission-daemon
-
 # stop the daemon before we modify config (required)
 systemctl stop transmission-daemon
 
