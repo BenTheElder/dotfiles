@@ -29,3 +29,4 @@ run_script_traced "${SCRIPTS}"/install-packages.sh
 run_script_traced "${SCRIPTS}"/automatic-upgrades.sh
 run_script_traced "${SCRIPTS}"/disable-sleep.sh
 run_script_traced "${SCRIPTS}"/configure-transmission.sh
+run_script_traced "${SCRIPTS}"/configure-wireguard.sh

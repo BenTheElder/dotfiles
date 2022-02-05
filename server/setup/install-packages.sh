@@ -53,7 +53,7 @@ apt_install \
     plexmediaserver \
     rsync screen \
     transmission-daemon \
-    wireguard
+    wireguard qrencode dnsutils
 # backports packages
 apt_install -t "${codename_backports:?}" \
     dkms spl-dkms \
