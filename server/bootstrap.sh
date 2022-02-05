@@ -16,6 +16,11 @@ if [ $UID -ne 0 ]; then
   exit
 fi
 
+# run in a tempdir
+tmp="$(mktemp -d)"
+trap 'rm -rf "${tmp}"' EXIT
+cd "${tmp}"
+
 SCRIPTS="${SCRIPT_DIR}/setup"
 run_script_traced() {
   (set -x; source "$@")
