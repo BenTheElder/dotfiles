@@ -14,7 +14,7 @@ set -o pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 # apt update helper
-update_apt() {
+apt_update() {
     >&2 echo "INFO: updating apt"
     apt update || >&2 echo "WARNING: Failed to update apt"
 }
@@ -26,9 +26,9 @@ apt_install() {
 
 # install packages used for the rest of the setup
 >&2 echo "INFO: installing base packages"
+apt_update
 apt_install \
-    curl \
-    software-properties-common
+    curl software-properties-common
 
 # enable backports
 codename="$(sed -nr 's#VERSION_CODENAME=(.*)#\1#p' /etc/os-release)"
