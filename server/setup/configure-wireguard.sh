@@ -27,8 +27,6 @@ fi
     echo '[Interface]'
     echo "PrivateKey = ${wg_privkey}"
     echo 'ListenPort = 51820'
-    echo 'PostUp     = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'
-    echo 'PostDown   = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE'
     # include peers config
     # see: utils/gen-wireguard-peerconf.sh
     [ ! -f "${peers_conf_path}" ] || cat "${peers_conf_path}"
