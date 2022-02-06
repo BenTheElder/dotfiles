@@ -27,7 +27,7 @@ server_public_address="${server_public_ip}:51820"
 gen_conf() {
     echo '[Interface]'
     echo "PrivateKey = ${wg_client_priv_key}"
-    echo "Address    = ${address}"
+    echo "Address    = ${wg_client_ip}"
     echo ''
     echo "[Peer]"
     echo "PublicKey  = ${server_public_key}"
