@@ -7,11 +7,11 @@ set -o pipefail
 # the server must be configured first (server/setup/configure-wireguard.sh)
 >&2 echo "Configuring wireguard peer"
 
-# TODO: should be configurable
+# TODO: should be configurable or auto-increment for additional peers
 wg_client_ip='10.0.2.2/32'
 readonly wg_iface='wg0'
 readonly peers_conf_path="/etc/wireguard/${wg_iface}-peers.conf"
-readonly wg_server_ip='10.0.2.1/32'
+readonly wg_server_ip='10.0.2.1'
 
 # get keys
 wg_client_priv_key="$(wg genkey)"
@@ -35,6 +35,8 @@ gen_conf() {
     echo "PublicKey  = ${server_public_key}"
     echo "AllowedIPs = 0.0.0.0/0"
     echo "Endpoint   = ${server_public_address}"
+    # NOTE: second IP is router fallback, which also routes through the server primarily
+    echo "DNS        = ${wg_server_ip},10.0.0.1"
 }
 conf="$(gen_conf)"
 echo "${conf}"
