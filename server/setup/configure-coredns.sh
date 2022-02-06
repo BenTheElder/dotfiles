@@ -11,7 +11,7 @@ if [[ ! -d "${corefile_dir}" ]]; then
     (umask 022 && mkdir "$(dirname "${corefile_path}")")
 fi
 cat <<EOF >"${corefile_path}"
-:53 {
+.:53 {
     forward . tls://9.9.9.9 tls://149.112.112.112 tls://2620:fe::fe tls://2620:fe::9 {
         tls_servername dns.quad9.net
         policy sequential
