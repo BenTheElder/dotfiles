@@ -23,7 +23,7 @@ curl -o "${tmpdir}/${tarball}.sha256" -L "${tarball_url}.sha256"
 cat "${tmpdir}/${tarball}.sha256"
 
 # check hash
-sha256sum --check --status "${tmpdir}/${tarball}.sha256"
+(cd "${tmpdir}" && sha256sum --check --status "${tmpdir}/${tarball}.sha256")
 
 # extract and install
 tar -C /usr/local/bin -xzvf "${tmpdir}/${tarball}"
