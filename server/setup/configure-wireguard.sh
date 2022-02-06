@@ -55,6 +55,5 @@ iface ${wg_iface} inet static
 EOF
 
 # start wireguard
-ifup "${wg_iface}"
-wg syncconf "${wg_iface}"
+systemctl restart networking
 wg show "${wg_iface}"
