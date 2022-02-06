@@ -16,7 +16,7 @@ readonly wg_client_ip_upper24='10.0.2'
 # count number of existing peers, add one for the server and
 # this is the IP. This supports 253 peers along with the server.
 num_existing_peers="$(grep -c '\[Peer\]' "${peers_conf_path}")"
-wg_client_ip="${wg_client_ip_upper24}.$((num_existing_peers + 1))"
+wg_client_ip="${wg_client_ip_upper24}.$((num_existing_peers + 2))"
 
 # get keys
 wg_client_priv_key="$(wg genkey)"
