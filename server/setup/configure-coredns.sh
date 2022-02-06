@@ -6,7 +6,7 @@ set -o pipefail
 # this script configures CoreDNS
 
 corefile_path='/etc/coredns/Corefile'
-
+(umask 022 && mkdir "$(dirname "${corefile_path}")")
 cat <<EOF >"${corefile_path}"
 :53 {
     forward . tls://9.9.9.9 tls://149.112.112.112 tls://2620:fe::fe tls://2620:fe::9 {
