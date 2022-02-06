@@ -32,7 +32,7 @@ gen_conf() {
     echo "[Peer]"
     echo "PublicKey  = ${server_public_key}"
     echo "AllowedIPs = ${wg_server_ip}"
-    echo "Endpoint   = {server_public_address}"
+    echo "Endpoint   = ${server_public_address}"
 }
 conf="$(gen_conf)"
 echo "${conf}"
