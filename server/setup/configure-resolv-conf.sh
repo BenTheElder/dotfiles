@@ -15,7 +15,7 @@ systemctl reload NetworkManager
 
 # ensure /etc/resolv.conf includes the DNS server we'll be
 # running ourselves AND a reasonable fallback in case we break it
-cat <<EOF /etc/resolv.conf
+cat <<EOF >/etc/resolv.conf
 nameserver 127.0.0.1
 nameserver 9.9.9.9
 EOF
