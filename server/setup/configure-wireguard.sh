@@ -27,8 +27,6 @@ fi
     echo '[Interface]'
     echo "PrivateKey = ${wg_privkey}"
     echo 'ListenPort = 51820'
-    echo 'PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE # Add forwarding when VPN is started'
-    echo 'PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE # Remove forwarding when VPN is shutdown'
     # include peers config
     # see: utils/gen-wireguard-peerconf.sh
     [ ! -f "${peers_conf_path}" ] || cat "${peers_conf_path}"
@@ -47,7 +45,11 @@ iface ${wg_iface} inet static
     pre-up ip link add \$IFACE type wireguard
     # before ifup, set the WireGuard config from earlier
     pre-up wg setconf \$IFACE /etc/wireguard/\$IFACE.conf
-    # after ifdown, destroy the wg0 interface
+    # add forwarding
+    post-up ptables -A FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    # after ifdown, disable forwarding
+    post-down iptables -D FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERAD
+    # after ifdown, destroy the ${wg_iface} interface
     post-down ip link del \$IFACE
 EOF
 
