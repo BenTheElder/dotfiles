@@ -28,7 +28,7 @@ systemd-sysusers
 
 # configure systemd
 # https://github.com/coredns/deployment/blob/39c9f7ed7640f86fa0fb6ba06a88e9afa830b306/systemd/coredns.service
-cat <<EOF >/etc/systemd/user/coredns.service
+cat <<EOF >/etc/systemd/system/coredns.service
 [Unit]
 Description=CoreDNS DNS server
 Documentation=https://coredns.io
