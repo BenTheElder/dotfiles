@@ -37,21 +37,16 @@ fi
 cat <<EOF >"/etc/network/interfaces.d/${wg_iface}"
 # indicate that ${wg_iface} should be created when the system boots, and on ifup -a
 auto ${wg_iface}
-
 # describe ${wg_iface} as an IPv4 interface with static address
 iface ${wg_iface} inet static
-
-        # static IP address
-        address 10.0.2.1/24
-
-        # before ifup, create the device with this ip link command
-        pre-up ip link add \$IFACE type wireguard
-
-        # before ifup, set the WireGuard config from earlier
-        pre-up wg setconf \$IFACE /etc/wireguard/\$IFACE.conf
-
-        # after ifdown, destroy the wg0 interface
-        post-down ip link del \$IFACE
+    # static IP address
+    address 10.0.2.1/24
+    # before ifup, create the device with this ip link command
+    pre-up ip link add \$IFACE type wireguard
+    # before ifup, set the WireGuard config from earlier
+    pre-up wg setconf \$IFACE /etc/wireguard/\$IFACE.conf
+    # after ifdown, destroy the wg0 interface
+    post-down ip link del \$IFACE
 EOF
 
 # start wireguard
