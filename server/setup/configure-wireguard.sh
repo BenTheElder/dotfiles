@@ -5,6 +5,8 @@ set -o pipefail
 
 >&2 echo "Configuring wireguard"
 
+# TODO: hardcoding this stinks, but auto-detecting is :effort:
+readonly eth_iface='enp0s25'
 readonly wg_iface='wg0'
 readonly wg_conf_path="/etc/wireguard/${wg_iface}.conf"
 readonly peers_conf_path="/etc/wireguard/${wg_iface}-peers.conf"
@@ -46,9 +48,9 @@ iface ${wg_iface} inet static
     # before ifup, set the WireGuard config from earlier
     pre-up wg setconf \$IFACE /etc/wireguard/\$IFACE.conf
     # add forwarding
-    post-up ptables -A FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    post-up ptables -A FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -A POSTROUTING -o ${eth_iface} -j MASQUERADE; ip6tables -A FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -A POSTROUTING -o ${eth_iface} -j MASQUERADE
     # after ifdown, disable forwarding
-    post-down iptables -D FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERAD
+    post-down iptables -D FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -D POSTROUTING -o ${eth_iface} -j MASQUERADE; ip6tables -D FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -D POSTROUTING -o ${eth_iface} -j MASQUERAD
     # after ifdown, destroy the ${wg_iface} interface
     post-down ip link del \$IFACE
 EOF
