@@ -20,7 +20,7 @@ wg_client_pub_key="$(echo ${wg_client_priv_key} | wg pubkey)"
 # get server info
 server_public_key="$(wg show "${wg_iface}" public-key)"
 # TODO: better way to get public IP portably?
-server_public_ip="$(curl https://ipinfo.io/ip)/32"
+server_public_ip="$(curl https://ipinfo.io/ip)"
 server_public_address="${server_public_ip}:51820"
 
 # generate config

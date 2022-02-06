@@ -52,3 +52,8 @@ EOF
 # start wireguard
 systemctl restart networking
 wg show "${wg_iface}"
+
+# ensure network forwarding
+>&2 echo 'Setting net.ipv4.ip_forward=1'
+echo 'net.ipv4.ip_forward=1' /etc/sysctl.d/forward-traffic.conf
+sysctl -p
