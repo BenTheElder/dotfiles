@@ -8,7 +8,7 @@ set -o pipefail
 version='1.8.7'
 if which coredns >/dev/null; then
     current_version="$(coredns --version | head -n1 | sed -nr 's#CoreDNS-(.*)#\1#p')"
-    if [[ "${current_version}" = "${version}" ]];
+    if [[ "${current_version}" = "${version}" ]]; then
         >&2 echo "CoreDNS v${version} already installed"
         exit 0
     fi
