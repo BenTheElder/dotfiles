@@ -5,13 +5,24 @@ set -o pipefail
 
 # this script configures CoreDNS
 
-corefile_path='/etc/coredns/Corefile'
+# setup coreDNS config paths
+coredns_config_dir='/etc/coredns'
 corefile_dir="$(dirname "${corefile_path}")"
 if [[ ! -d "${corefile_dir}" ]]; then
-    (umask 022 && mkdir "$(dirname "${corefile_path}")")
+    mkdir "$(dirname "${corefile_path}")"
 fi
+corefile_path="${coredns_config_dir}/Corefile"
+block_hosts_path="${coredns_config_dir}/hosts"
+
+# ensure the file exists, we will actually pull it regularly with
+# a systemd timer
+touch "${block_hosts_path}"
+
 cat <<EOF >"${corefile_path}"
 .:53 {
+    hosts /etc/coredns/hosts {
+        fallthrough
+    }
     forward . tls://9.9.9.9 tls://149.112.112.112 tls://2620:fe::fe tls://2620:fe::9 {
         tls_servername dns.quad9.net
         policy sequential
@@ -51,6 +62,34 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
+# add service to periodically fetch hosts
+# see: https://github.com/StevenBlack/hosts
+# adware + malware => 0.0.0.0
+cat <<EOF >/etc/systemd/system/update-coredns-hosts.service
+[Unit]
+Description=Updates CoreDNS hosts file
+
+[Service]
+Type=simple
+ExecStart=curl -o "${block_hosts_path}" -L https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+
+[Install]
+WantedBy=default.target
+EOF
+cat <<EOF >/etc/systemd/system/update-coredns-hosts.timer
+[Unit]
+Description=Schedule CoreDNS hosts updates
+
+[Timer]
+Persistent=true
+OnBootSec=120
+OnCalendar=daily
+
+[Install]
+WantedBy=timers.target
+EOF
+
+# enable services
 systemctl daemon-reload
-systemctl enable coredns.service
-systemctl restart coredns.service
+systemctl enable --now coredns.service
+systemctl enable --now update-coredns-hosts.timer
