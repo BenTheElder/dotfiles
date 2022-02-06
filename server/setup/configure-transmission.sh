@@ -4,7 +4,7 @@ set -o nounset
 set -o pipefail
 
 # TODO: make this configurable
-TRANSMISSION_DOWNLOAD_DIR="/mnt/storage/plex/download"
+TRANSMISSION_DOWNLOAD_DIR="/mnt/storage/download"
 
 # stop the daemon before we modify config (required)
 systemctl stop transmission-daemon
