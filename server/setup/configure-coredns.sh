@@ -41,7 +41,7 @@ NoNewPrivileges=true
 User=coredns
 WorkingDirectory=~
 ExecStart=/usr/local/bin/coredns -conf=${corefile_path}
-ExecReload=/bin/kill -SIGUSR1 $MAINPID
+ExecReload=/bin/kill -SIGUSR1 \$MAINPID
 Restart=on-failure
 
 [Install]
