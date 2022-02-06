@@ -12,7 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 if [ $UID -ne 0 ]; then
   export ORIGINAL_USER="${USER}"
   export ORIGINAL_HOME="${HOME}"
-  su - root "${SCRIPT_DIR}/bootstrap.sh"
+  su -w 'ORIGINAL_USER,ORIGINAL_HOME' - root "${SCRIPT_DIR}/bootstrap.sh"
   exit
 fi
 
