@@ -7,9 +7,8 @@ set -o pipefail
 
 # setup coreDNS config paths
 coredns_config_dir='/etc/coredns'
-corefile_dir="$(dirname "${corefile_path}")"
-if [[ ! -d "${corefile_dir}" ]]; then
-    mkdir "$(dirname "${corefile_path}")"
+if [[ ! -d "${coredns_config_dir}" ]]; then
+    mkdir "${coredns_config_dir}"
 fi
 corefile_path="${coredns_config_dir}/Corefile"
 block_hosts_path="${coredns_config_dir}/hosts"
@@ -18,6 +17,7 @@ block_hosts_path="${coredns_config_dir}/hosts"
 # a systemd timer
 touch "${block_hosts_path}"
 
+# CoreDNS config
 cat <<EOF >"${corefile_path}"
 .:53 {
     hosts /etc/coredns/hosts {
