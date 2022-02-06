@@ -23,7 +23,7 @@ cd "${tmp}"
 
 SCRIPTS="${SCRIPT_DIR}/setup"
 run_script_traced() {
-  (bash -c "set -x; source $@")
+  (bash -c 'set -x; source '"$@")
 }
 run_script_traced "${SCRIPTS}"/configure-resolv-conf.sh
 run_script_traced "${SCRIPTS}"/install-packages.sh
