@@ -18,7 +18,7 @@ cat <<EOF >"${corefile_path}"
     }
     # TODO: tune cache
     cache
-    error
+    errors
 }
 EOF
 
