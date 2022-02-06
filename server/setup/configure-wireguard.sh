@@ -27,6 +27,8 @@ fi
     echo '[Interface]'
     echo "PrivateKey = ${wg_privkey}"
     echo 'ListenPort = 51820'
+    echo 'PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE # Add forwarding when VPN is started'
+    echo 'PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE # Remove forwarding when VPN is shutdown'
     # include peers config
     # see: utils/gen-wireguard-peerconf.sh
     [ ! -f "${peers_conf_path}" ] || cat "${peers_conf_path}"
@@ -55,5 +57,8 @@ wg show "${wg_iface}"
 
 # ensure network forwarding
 >&2 echo 'Setting net.ipv4.ip_forward=1'
-echo 'net.ipv4.ip_forward=1' >/etc/sysctl.d/forward-traffic.conf
+{
+    echo "net.ipv4.ip_forward = 1"
+    echo "net.ipv6.conf.all.forwarding = 1"
+}> /etc/sysctl.d/wg.conf
 sysctl --system

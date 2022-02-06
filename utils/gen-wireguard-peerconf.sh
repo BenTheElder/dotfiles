@@ -24,6 +24,7 @@ server_public_ip="$(curl https://ipinfo.io/ip)"
 server_public_address="${server_public_ip}:51820"
 
 # generate config
+# TODO: DNS, IPv6
 >&2 echo "Use the following config on your client"
 gen_conf() {
     echo '[Interface]'
@@ -32,7 +33,7 @@ gen_conf() {
     echo ''
     echo "[Peer]"
     echo "PublicKey  = ${server_public_key}"
-    echo "AllowedIPs = ${wg_server_ip}"
+    echo "AllowedIPs = 0.0.0.0/0"
     echo "Endpoint   = ${server_public_address}"
 }
 conf="$(gen_conf)"
