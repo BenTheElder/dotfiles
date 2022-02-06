@@ -48,9 +48,9 @@ iface ${wg_iface} inet static
     # before ifup, set the WireGuard config from earlier
     pre-up wg setconf \$IFACE /etc/wireguard/\$IFACE.conf
     # add forwarding
-    post-up ptables -A FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -A POSTROUTING -o ${eth_iface} -j MASQUERADE; ip6tables -A FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -A POSTROUTING -o ${eth_iface} -j MASQUERADE
+    post-up iptables -A FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -A POSTROUTING -o ${eth_iface} -j MASQUERADE; ip6tables -A FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -A POSTROUTING -o ${eth_iface} -j MASQUERADE
     # after ifdown, disable forwarding
-    post-down iptables -D FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -D POSTROUTING -o ${eth_iface} -j MASQUERADE; ip6tables -D FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -D POSTROUTING -o ${eth_iface} -j MASQUERAD
+    post-down iptables -D FORWARD -i ${wg_iface} -j ACCEPT; iptables -t nat -D POSTROUTING -o ${eth_iface} -j MASQUERADE; ip6tables -D FORWARD -i ${wg_iface} -j ACCEPT; ip6tables -t nat -D POSTROUTING -o ${eth_iface} -j MASQUERADE
     # after ifdown, destroy the ${wg_iface} interface
     post-down ip link del \$IFACE
 EOF
