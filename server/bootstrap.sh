@@ -25,8 +25,11 @@ SCRIPTS="${SCRIPT_DIR}/setup"
 run_script_traced() {
   (set -x; source "$@")
 }
+run_script_traced "${SCRIPTS}"/configure-resolv-conf.sh
 run_script_traced "${SCRIPTS}"/install-packages.sh
 run_script_traced "${SCRIPTS}"/automatic-upgrades.sh
+run_script_traced "${SCRIPTS}"/install-coredns.sh
+run_script_traced "${SCRIPTS}"/configure-coredns.sh
 run_script_traced "${SCRIPTS}"/disable-sleep.sh
 run_script_traced "${SCRIPTS}"/configure-transmission.sh
 run_script_traced "${SCRIPTS}"/configure-wireguard.sh
