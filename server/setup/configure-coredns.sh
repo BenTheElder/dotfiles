@@ -23,7 +23,7 @@ cat <<EOF >"${corefile_path}"
 EOF
 
 # ensure coredns user
-echo 'u coredns - "CoreDNS is a DNS server that chains plugins " /' >/usr/lib/sysusers.d/coredns.conf
+echo 'u coredns - "CoreDNS is a DNS server that chains plugins " / /usr/sbin/nologin' >/usr/lib/sysusers.d/coredns.conf
 systemd-sysusers
 
 # configure systemd
@@ -42,7 +42,6 @@ CapabilityBoundingSet=CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 User=coredns
-WorkingDirectory=~
 ExecStart=/usr/local/bin/coredns -conf=${corefile_path}
 ExecReload=/bin/kill -SIGUSR1 \$MAINPID
 Restart=on-failure
@@ -53,3 +52,4 @@ EOF
 
 systemctl daemon-reload
 systemctl enable coredns.service
+systemctl restart coredns.service
