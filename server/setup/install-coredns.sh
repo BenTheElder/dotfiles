@@ -20,6 +20,8 @@ trap 'rm -rf "${tmpdir}"' EXIT
 curl -o "${tmpdir}/${tarball}" "${tarball_url}"
 curl -o "${tmpdir}/${tarball}.sha256" "${tarball_url}.sha256"
 
+cat "${tmpdir}/${tarball}.sha256"
+
 # check hash
 sha256sum --check --status "${tmpdir}/${tarball}.sha256"
 
