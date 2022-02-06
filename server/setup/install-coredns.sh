@@ -17,8 +17,8 @@ tmpdir="$(mktemp -d)"
 trap 'rm -rf "${tmpdir}"' EXIT
 
 # download tarball and hash
-curl -o "${tmpdir}/${tarball}" "${tarball_url}"
-curl -o "${tmpdir}/${tarball}.sha256" "${tarball_url}.sha256"
+curl -o "${tmpdir}/${tarball}" -L "${tarball_url}"
+curl -o "${tmpdir}/${tarball}.sha256" -L "${tarball_url}.sha256"
 
 cat "${tmpdir}/${tarball}.sha256"
 
