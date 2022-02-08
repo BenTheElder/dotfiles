@@ -115,3 +115,5 @@ systemctl daemon-reload
 systemctl enable coredns.service
 systemctl restart coredns.service
 systemctl enable --now update-coredns-hosts.timer
+# force immediate run
+systemctl start update-coredns-hosts.service
