@@ -82,7 +82,7 @@ hosts_path='${block_hosts_path}'
 curl -o "\${hosts_path}" -L https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 
 # post-process
-echo '${host_default_ip} "\${host_name}.local." >>"\${hosts_path}"
+echo '\${host_default_ip} "\${host_name}.local." >>"\${hosts_path}"
 EOF
 chmod +x "${update_hosts_script}"
 
