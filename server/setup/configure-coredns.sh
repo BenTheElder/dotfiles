@@ -73,6 +73,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# this is really annoying
+# surely there should be a reserved domain for this!
+my_public_tld_suffix='home.elder.dev'
+
 # we expect to have a static IP but still let's detect this each time
 host_name="\$(hostname)"
 host_default_ip="\$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')"
@@ -81,8 +85,8 @@ host_default_ip="\$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')"
 hosts_path='${block_hosts_path}'
 curl -o "\${hosts_path}" -L https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 
-# post-process
-echo "\${host_default_ip} \${host_name}.local." >>"\${hosts_path}"
+# add entry for this server
+echo "\${host_default_ip} \${host_name}.\${my_public_tld_suffix}." >>"\${hosts_path}"
 EOF
 chmod +x "${update_hosts_script}"
 
