@@ -8,6 +8,9 @@ hosts_path="${BLOCK_HOSTS_PATH:?}"
 # regex hostname patterns to allowlist
 host_allowlist_patterns=(
     # https://github.com/StevenBlack/hosts/issues/1887
+    # TODO: this was removed from the upstream source,
+    # but does not yet appear in StevenBlack/hosts
+    # When that is fixed, remove this.
     'oneapi\.telematicsct\.com'
 )
 
@@ -31,5 +34,5 @@ done
 grep "${grep_args[@]}" "${raw_hosts_path}" >"${hosts_path}"
 
 # add entry for this server
-echo "${host_default_ip} ${host_name}.\${my_public_tld_suffix}." >>"${hosts_path}"
+echo "${host_default_ip} ${host_name}.${my_public_tld_suffix}." >>"${hosts_path}"
 
