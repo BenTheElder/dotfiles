@@ -26,12 +26,16 @@ host_default_ip="$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')"
 raw_hosts_path="${hosts_path}.raw"
 curl -o "${raw_hosts_path}" -L https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 
-# filter it
-grep_args=(-vE)
-for pat in "${host_allowlist_patterns[@]}"; do
-    grep_args+=(-e '^0\.0\.0\.0 '"$pat")
-done
-grep "${grep_args[@]}" "${raw_hosts_path}" >"${hosts_path}"
+# filter it if we have any allowlist patterns
+if [ ${#host_allowlist_patterns[@]} -eq 0 ]; then
+    cp "${raw_hosts_path}" "${hosts_path}"
+else
+    grep_args=(-vE)
+    for pat in "${host_allowlist_patterns[@]}"; do
+        grep_args+=(-e '^0\.0\.0\.0 '"$pat")
+    done
+    grep "${grep_args[@]}" "${raw_hosts_path}" >"${hosts_path}"
+fi
 
 # add entry for this server
 echo "${host_default_ip} ${host_name}.${my_public_tld_suffix}." >>"${hosts_path}"
