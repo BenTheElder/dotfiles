@@ -29,7 +29,7 @@ curl -o "${raw_hosts_path}" -L https://raw.githubusercontent.com/StevenBlack/hos
 # filter it
 grep_args=(-vE)
 for pat in "${host_allowlist_patterns[@]}"; do
-    grep_command+=(-e '^0\.0\.0\.0 '"$pat")
+    grep_args+=(-e '^0\.0\.0\.0 '"$pat")
 done
 grep "${grep_args[@]}" "${raw_hosts_path}" >"${hosts_path}"
 
