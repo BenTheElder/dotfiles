@@ -4,6 +4,7 @@ set -o nounset
 set -o pipefail
 
 # this script configures CoreDNS
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 # setup coreDNS config paths
 coredns_config_dir='/etc/coredns'
@@ -66,28 +67,11 @@ EOF
 # add service to periodically fetch hosts
 # see: https://github.com/StevenBlack/hosts
 # adware + malware => 0.0.0.0
+readonly update_hosts_script_src="${SCRIPT_DIR}/../utils/update-hosts.sh"
 readonly update_hosts_script='/etc/coredns/update-hosts.sh'
-cat <<EOF >"${update_hosts_script}"
-#!/usr/bin/env bash
-set -o errexit
-set -o nounset
-set -o pipefail
-
-# this is really annoying
-# surely there should be a reserved domain for this!
-my_public_tld_suffix='home.elder.dev'
-
-# we expect to have a static IP but still let's detect this each time
-host_name="\$(hostname)"
-host_default_ip="\$(ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')"
-
-# fetch hosts file
-hosts_path='${block_hosts_path}'
-curl -o "\${hosts_path}" -L https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-
-# add entry for this server
-echo "\${host_default_ip} \${host_name}.\${my_public_tld_suffix}." >>"\${hosts_path}"
-EOF
+# cat because i'm lazy and we want to copy a single file but
+# with destination permissions 
+cat "${update_hosts_script_src}" >"${update_hosts_script}"
 chmod +x "${update_hosts_script}"
 
 cat <<EOF >/etc/systemd/system/update-coredns-hosts.service
@@ -96,6 +80,7 @@ Description=Updates CoreDNS hosts file
 
 [Service]
 Type=simple
+Environment="BLOCK_HOSTS_PATH=${block_hosts_path}"
 ExecStart=${update_hosts_script}
 
 [Install]
