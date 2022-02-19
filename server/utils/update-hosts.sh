@@ -8,7 +8,7 @@ hosts_path="${BLOCK_HOSTS_PATH:?}"
 # regex hostname patterns to allowlist
 host_allowlist_patterns=(
     # allow google shopping results
-    '^(www\.)?googleadservices.com$'
+    '(www\.)?googleadservices.com'
 )
 
 # this is really annoying
@@ -29,7 +29,7 @@ if [ ${#host_allowlist_patterns[@]} -eq 0 ]; then
 else
     grep_args=(-vE)
     for pat in "${host_allowlist_patterns[@]}"; do
-        grep_args+=(-e '^0\.0\.0\.0 '"$pat")
+        grep_args+=(-e '^0\.0\.0\.0 '"$pat"'$')
     done
     grep "${grep_args[@]}" "${raw_hosts_path}" >"${hosts_path}"
 fi
