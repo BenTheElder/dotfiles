@@ -7,11 +7,8 @@ hosts_path="${BLOCK_HOSTS_PATH:?}"
 
 # regex hostname patterns to allowlist
 host_allowlist_patterns=(
-    # https://github.com/StevenBlack/hosts/issues/1887
-    # TODO: this was removed from the upstream source,
-    # but does not yet appear in StevenBlack/hosts
-    # When that is fixed, remove this.
-    'oneapi\.telematicsct\.com'
+    # allow google shopping results
+    '^(www\.)?googleadservices.com$'
 )
 
 # this is really annoying
