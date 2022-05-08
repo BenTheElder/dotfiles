@@ -11,6 +11,7 @@ host_allowlist_patterns=(
     # breaking these annoys users on the network
     '(www\.)?googleadservices.com'
     'clickserve.dartsearch.net'
+    'ad.doubleclick.net'
 )
 
 # this is really annoying
