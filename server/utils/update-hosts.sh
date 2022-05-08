@@ -8,7 +8,9 @@ hosts_path="${BLOCK_HOSTS_PATH:?}"
 # regex hostname patterns to allowlist
 host_allowlist_patterns=(
     # allow google shopping results
+    # breaking these annoys users on the network
     '(www\.)?googleadservices.com'
+    'clickserve.dartsearch.net'
 )
 
 # this is really annoying
