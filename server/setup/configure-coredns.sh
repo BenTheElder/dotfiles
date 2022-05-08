@@ -102,7 +102,11 @@ EOF
 # enable services
 systemctl daemon-reload
 systemctl enable coredns.service
-systemctl restart coredns.service
 systemctl enable --now update-coredns-hosts.timer
 # force immediate run
 systemctl start update-coredns-hosts.service
+# then restart coredns
+# we do this last to minimize the chance of caching results with the old
+# hosts file
+# TODO: add a periodic restart ?
+systemctl restart coredns.service
