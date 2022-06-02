@@ -5,7 +5,8 @@ set -o pipefail
 
 # this scipt installs https://coredns.io/
 
-version='1.9.1'
+# TODO: automatic updates
+version='1.9.3'
 if which coredns >/dev/null; then
     current_version="$(coredns --version | head -n1 | sed -nr 's#CoreDNS-(.*)#\1#p')"
     if [[ "${current_version}" = "${version}" ]]; then
@@ -33,7 +34,7 @@ curl -o "${tmpdir}/${tarball}.sha256" -L "${tarball_url}.sha256"
 cat "${tmpdir}/${tarball}.sha256"
 
 # check hash
-# TODO: this approach only gives us an integrity check
+# TODO: this approach only gives us an integrity check ...
 (cd "${tmpdir}" && sha256sum --check --status "${tmpdir}/${tarball}.sha256")
 
 # extract and install
