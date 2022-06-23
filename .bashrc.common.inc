@@ -128,20 +128,20 @@ __pretty_pwd() {
 }
 # custom PS1
 PS1="${DEFAULT}"
-PS1+="${WHITE}${BOLD}["
+PS1+="${BOLD}["
 PS1+="${LBLUE256}${USER}"
 PS1+="${RED256}@"
 PS1+="${YELLOW256}$(hostname -s)"
 PS1+="${LBLUE256}:"
 PS1+="${LGREEN256}"
 PS1+='$(__pretty_pwd)'
-PS1+="${WHITE}·"
+PS1+="${DEFAULT}${BOLD}·"
 PS1+="${LBLUE256}"
 PS1+='$(date +%Y-%m-%d)'
 PS1+="${RED256}T${YELLOW256}"
 PS1+='$(date +%T%z)'
-PS1+="${WHITE}"
+PS1+="${DEFAULT}${BOLD}"
 PS1+='$(__git_ps1)'
-PS1+="${WHITE}]${BOLD}"$'\n'"${DEFAULT}${WHITE}$"
+PS1+="${DEFAULT}${BOLD}]"$'\n'"${DEFAULT}$"
 PS1+="${DEFAULT} "
 export PS1;
