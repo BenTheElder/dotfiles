@@ -25,7 +25,7 @@ cat <<EOF >"${corefile_path}"
         reload 5s
         fallthrough
     }
-    forward . tls:/8.8.8.8 tls://8.8.4.4 tls://2001:4860:4860::8888 tls://2001:4860:4860::8844 {
+    forward . tls://8.8.8.8 tls://8.8.4.4 tls://2001:4860:4860::8888 tls://2001:4860:4860::8844 {
         tls_servername dns.google
         policy sequential
     }
