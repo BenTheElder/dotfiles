@@ -30,7 +30,7 @@ cat <<EOF >"${corefile_path}"
         policy sequential
     }
     # TODO: tune cache
-    cache
+    cache 30
     log
     errors
 }
