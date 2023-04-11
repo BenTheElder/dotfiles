@@ -2,8 +2,8 @@
 package main
 
 import (
+	"flag"
 	"log"
-	"os"
 	"strconv"
 
 	"github.com/oleiade/lane/v2"
@@ -29,14 +29,19 @@ type Node struct {
 	Path   []string
 }
 
-func bfs(digits [6]int, goal int) []string {
-	log.Println("BFS search for Digits:", digits, "Goal:", goal)
-	queue := lane.NewDeque(Node{
+func search(digits [6]int, goal int, longest bool) []string {
+	if longest {
+		log.Println("Running DFS for longest digits solution:", digits, "Goal:", goal)
+	} else {
+		log.Println("Running BFS for shortest digits solution:", digits, "Goal:", goal)
+	}
+	deque := lane.NewDeque(Node{
 		Digits: digits[:],
 		Path:   []string{},
 	})
-	for queue.Size() > 0 {
-		v, _ := queue.Pop()
+	var solution []string = nil
+	for deque.Size() > 0 {
+		v, _ := deque.Pop()
 		// low effort select all pairs
 		for i := 0; i < len(v.Digits); i++ {
 			for j := 0; j < len(v.Digits); j++ {
@@ -56,7 +61,11 @@ func bfs(digits [6]int, goal int) []string {
 					}
 					val := do(x, y)
 					if val == goal {
-						return append(v.Path, strconv.Itoa(x), operation, strconv.Itoa(y))
+						// max 5 operations
+						if !longest || len(v.Path) == 4*3 {
+							return append(v.Path, strconv.Itoa(x), operation, strconv.Itoa(y))
+						}
+						solution = append(v.Path, strconv.Itoa(x), operation, strconv.Itoa(y))
 					}
 					newDigits := make([]int, 0, len(v.Digits)-1)
 					newDigits = append(newDigits, val)
@@ -65,38 +74,51 @@ func bfs(digits [6]int, goal int) []string {
 							newDigits = append(newDigits, v.Digits[k])
 						}
 					}
-					queue.Prepend(
-						Node{
+					if longest {
+						// DFS => stack
+						deque.Append(Node{
 							Digits: newDigits,
 							Path:   append(append([]string{}, v.Path...), strconv.Itoa(x), operation, strconv.Itoa(y)),
 						})
+					} else {
+						// BFS => queue
+						deque.Prepend(Node{
+							Digits: newDigits,
+							Path:   append(append([]string{}, v.Path...), strconv.Itoa(x), operation, strconv.Itoa(y)),
+						})
+					}
 				}
 			}
 		}
 	}
-	return nil
+	return solution
 }
 
 func main() {
+	var longest bool
+	flag.BoolVar(&longest, "longest", false, "find longest solution")
+	flag.Parse()
+
 	// parse 6 digits + goal from arguments
-	args := os.Args
-	if len(args) != 8 {
+	args := flag.Args()
+	if len(args) != 7 {
 		log.Println(args)
 		log.Fatal("exactly 6 digits and 1 goal required arguments")
 	}
 	digits := [6]int{}
 	for i := range digits {
-		digit, err := strconv.Atoi(args[i+1])
+		digit, err := strconv.Atoi(args[i])
 		if err != nil {
 			log.Fatalf("failed to parse digit: %v", err)
 		}
 		digits[i] = digit
 	}
-	goal, err := strconv.Atoi(args[7])
+	goal, err := strconv.Atoi(args[6])
 	if err != nil {
 		log.Fatalf("failed to parse goal: %v", err)
 	}
+
 	// find solution
-	solution := bfs(digits, goal)
+	solution := search(digits, goal, longest)
 	log.Println("Solution:", solution)
 }
