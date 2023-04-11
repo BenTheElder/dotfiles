@@ -120,5 +120,9 @@ func main() {
 
 	// find solution
 	solution := search(digits, goal, longest)
-	log.Println("Solution:", solution)
+	if solution != nil {
+		log.Println("Solution:", solution)
+	} else {
+		log.Fatal("Failed to find solution!")
+	}
 }
