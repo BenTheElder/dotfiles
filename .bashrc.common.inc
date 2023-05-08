@@ -36,9 +36,7 @@ alias s="screen -dRL"
 # - GIT -
 # https://stackoverflow.com/a/21148981
 alias git-fixlast="git commit -a --fixup=HEAD && GIT_EDITOR=true git rebase -i --autosquash HEAD~2"
-# TODO: make a generic alias to handle the current remote's default branch
-alias git-sync-upstream-main="git fetch upstream && git checkout main && git reset --hard upstream/main && git push origin"
-alias git-sync-upstream-master="git fetch upstream && git checkout master && git reset --hard upstream/master && git push origin"
+alias sync-git-upstream-origin='(DEFAULT_BRANCH="$(git rev-parse --abbrev-ref origin/HEAD | cut -d/ -f2)" && git fetch upstream && git checkout "${DEFAULT_BRANCH}" && git reset --hard upstream/"${DEFAULT_BRANCH}" && git push origin)'
 function github-checkout-upstream-pr(){ git fetch upstream "pull/$@/head:pr$@" && git checkout "pr$@"; }
 alias git-cleanup-branches="git checkout master; git pull origin master; git fetch --all -p; git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d"
 # - DOCKER - 
