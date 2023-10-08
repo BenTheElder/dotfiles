@@ -29,5 +29,6 @@
     "html.format.enable": false,
     "window.titleBarStyle": "custom",
     "window.doubleClickIconToClose": false,
-    "terminal.integrated.sendKeybindingsToShell": true
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "cSpell.enabled": false
 }
