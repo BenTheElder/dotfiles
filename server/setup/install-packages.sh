@@ -34,11 +34,11 @@ apt_install \
 codename="$(sed -nr 's#VERSION_CODENAME=(.*)#\1#p' /etc/os-release)"
 codename_backports="${codename}-backports"
 >&2 echo "INFO: Enabling ${codename_backports}"
-add-apt-repository "deb http://deb.debian.org/debian ${codename_backports:?} main contrib non-free"
+add-apt-repository "deb http://deb.debian.org/debian ${codename_backports:?} main contrib non-free non-free-firmware"
 
 # enable non-free and contrib repos (necessary for things like nvidia drivers)
 >&2 echo "INFO: Enabling non-free and contrib"
-add-apt-repository "deb http://deb.debian.org/debian ${codename:?} main non-free contrib"
+add-apt-repository "deb http://deb.debian.org/debian ${codename:?} main non-free non-free-firmware contrib"
 
 # add plex repo
 # https://support.plex.tv/articles/235974187-enable-repository-updating-for-supported-linux-server-distributions/
