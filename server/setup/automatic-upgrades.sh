@@ -35,16 +35,8 @@ mkdir -p /etc/systemd/system/apt-daily.timer.d/
 cat <<EOF >/etc/systemd/system/apt-daily.timer.d/override.conf
 [Timer]
 OnCalendar=
-OnCalendar=*-*-* 0,4,8,12,16,20:00
+OnCalendar=*-*-* *:20:00
 RandomizedDelaySec=15m
-EOF
-
-mkdir -p /etc/systemd/system/apt-daily.timer.d/
-cat <<EOF >/etc/systemd/system/apt-daily.timer.d/override.conf
-[Timer]
-OnCalendar=
-OnCalendar=*-*-* 0,4,8,12,16,20:20
-RandomizedDelaySec=1m
 EOF
 
 systemctl daemon-reload
