@@ -44,8 +44,8 @@ codename_backports="${codename}-backports"
 # add plex repo
 # https://support.plex.tv/articles/235974187-enable-repository-updating-for-supported-linux-server-distributions/
 # TODO: https://stackoverflow.com/a/71384057
-echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
-curl -sSLo / https://downloads.plex.tv/plex-keys/PlexSign.key 
+#echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
+#curl -sSLo / https://downloads.plex.tv/plex-keys/PlexSign.key 
 
 # install packages
 apt_update
