@@ -14,7 +14,7 @@ fi
 readonly corefile_path="${coredns_config_dir}/Corefile"
 readonly block_hosts_path="${coredns_config_dir}/hosts"
 readonly install_coredns_script_src="${SCRIPT_DIR}/../utils/install-coredns.sh"
-readonly install_coredns_script='${coredns_config_dir}/install-coredns.sh'
+readonly install_coredns_script="${coredns_config_dir}/install-coredns.sh"
 
 # cat because i'm lazy and we want to copy a single file but
 # with destination permissions 
@@ -102,7 +102,7 @@ EOF
 # see: https://github.com/StevenBlack/hosts
 # adware + malware => 0.0.0.0
 readonly update_hosts_script_src="${SCRIPT_DIR}/../utils/update-hosts.sh"
-readonly update_hosts_script='/etc/coredns/update-hosts.sh'
+readonly update_hosts_script="${coredns_config_dir}/update-hosts.sh"
 # cat because i'm lazy and we want to copy a single file but
 # with destination permissions 
 cat "${update_hosts_script_src}" >"${update_hosts_script}"
