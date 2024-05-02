@@ -28,7 +28,6 @@ run_script_traced() {
 run_script_traced "${SCRIPTS}"/configure-resolv-conf.sh
 run_script_traced "${SCRIPTS}"/install-packages.sh
 run_script_traced "${SCRIPTS}"/automatic-upgrades.sh
-run_script_traced "${SCRIPTS}"/install-coredns.sh
 run_script_traced "${SCRIPTS}"/configure-coredns.sh
 run_script_traced "${SCRIPTS}"/disable-sleep.sh
 run_script_traced "${SCRIPTS}"/configure-transmission.sh

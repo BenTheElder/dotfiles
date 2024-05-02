@@ -11,10 +11,44 @@ coredns_config_dir='/etc/coredns'
 if [[ ! -d "${coredns_config_dir}" ]]; then
     mkdir "${coredns_config_dir}"
 fi
-corefile_path="${coredns_config_dir}/Corefile"
-block_hosts_path="${coredns_config_dir}/hosts"
+readonly corefile_path="${coredns_config_dir}/Corefile"
+readonly block_hosts_path="${coredns_config_dir}/hosts"
+readonly install_coredns_script_src="${SCRIPT_DIR}/../utils/install-coredns.sh"
+readonly install_coredns_script='${coredns_config_dir}/install-coredns.sh'
 
-# ensure the file exists, we will actually pull it regularly with
+# cat because i'm lazy and we want to copy a single file but
+# with destination permissions 
+cat "${install_coredns_script_src}" >"${install_coredns_script}"
+chmod +x "${install_coredns_script}"
+
+# run once
+"${install_coredns_script}"
+
+cat <<EOF >/etc/systemd/system/update-coredns.service
+[Unit]
+Description=Updates CoreDNS install
+
+[Service]
+Type=simple
+ExecStart=${install_coredns_script}
+
+[Install]
+WantedBy=default.target
+EOF
+cat <<EOF >/etc/systemd/system/update-coredns.timer
+[Unit]
+Description=Schedule CoreDNS updates
+
+[Timer]
+Persistent=true
+OnBootSec=120
+OnCalendar=*-*-* *:01:00
+
+[Install]
+WantedBy=timers.target
+EOF
+
+# ensure the hosts file exists, we will actually pull it regularly with
 # a systemd timer
 touch "${block_hosts_path}"
 
@@ -93,7 +127,7 @@ Description=Schedule CoreDNS hosts updates
 [Timer]
 Persistent=true
 OnBootSec=120
-OnCalendar=daily
+OnCalendar=*-*-* *:20:00
 
 [Install]
 WantedBy=timers.target
