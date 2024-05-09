@@ -55,6 +55,7 @@ touch "${block_hosts_path}"
 # CoreDNS config
 cat <<EOF >"${corefile_path}"
 .:53 {
+    prometheus localhost:9153
     hosts /etc/coredns/hosts {
         reload 5s
         fallthrough
@@ -64,7 +65,10 @@ cat <<EOF >"${corefile_path}"
         policy sequential
     }
     # TODO: tune cache
-    cache 30
+    cache {
+        success 9984 300
+        denial  9984 5
+    }
     log
     errors
 }
