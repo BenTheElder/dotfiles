@@ -135,6 +135,7 @@ EOF
 
 # enable services
 systemctl daemon-reload
+systemctl enable update-coredns.timer
 systemctl enable coredns.service
 systemctl enable --now update-coredns-hosts.timer
 # force immediate run
