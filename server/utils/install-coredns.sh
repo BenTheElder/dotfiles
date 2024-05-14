@@ -3,7 +3,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# this scipt installs https://coredns.io/
+# this script installs https://coredns.io/
 
 GO_VERSION="$(curl -s https://go.dev/VERSION?m=text | head -n1)"
 echo "Detected current latest go: ${GO_VERSION}"
