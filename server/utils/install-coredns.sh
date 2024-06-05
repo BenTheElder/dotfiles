@@ -6,7 +6,7 @@ set -o pipefail
 # this script installs https://coredns.io/
 
 GO_VERSION="$(curl -s https://go.dev/VERSION?m=text | head -n1)"
-echo "Detected current latest go: ${GO_VERSION}"
+>&2 echo "Detected current latest go: ${GO_VERSION}"
 COREDNS_VERSION='latest'
 
 # systemd services don't set $HOME, and go caches etc go under $HOME
