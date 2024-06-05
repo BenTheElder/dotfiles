@@ -141,8 +141,9 @@ EOF
 systemctl daemon-reload
 systemctl enable update-coredns.timer
 systemctl enable coredns.service
-systemctl enable --now update-coredns-hosts.timer
+systemctl enable update-coredns-hosts.timer
 # force immediate run
+systemctl start update-coredns.service
 systemctl start update-coredns-hosts.service
 # then restart coredns
 # we do this last to minimize the chance of caching results with the old
