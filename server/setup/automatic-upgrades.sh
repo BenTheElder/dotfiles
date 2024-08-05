@@ -25,10 +25,10 @@ EOF
 
 # configure upgrade interval
 cat <<EOF >/etc/apt/apt.conf.d/20auto-upgrades
-APT::Periodic::Update-Package-Lists "1";
-APT::Periodic::Download-Upgradeable-Packages "1";
-APT::Periodic::AutocleanInterval "7";
-APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::Update-Package-Lists "always";
+APT::Periodic::Download-Upgradeable-Packages "always";
+APT::Periodic::AutocleanInterval "always";
+APT::Periodic::Unattended-Upgrade "always";
 EOF
 
 mkdir -p /etc/systemd/system/apt-daily.timer.d/
