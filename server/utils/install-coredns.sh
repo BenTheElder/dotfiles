@@ -25,6 +25,6 @@ if cmp -s "${new_coredns}" "${old_coredns}"; then
   >&2 echo "New CoreDNS binary is identical, doing nothing"
 else
   >&2 echo "New CoreDNS binary is different, copying over and restarting CoreDNS"
-  cp "${new_coredns}" "${old_coredns}"
+  mv "${new_coredns}" "${old_coredns}"
   systemctl restart coredns.service
 fi
