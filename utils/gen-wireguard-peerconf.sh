@@ -35,12 +35,11 @@ gen_conf() {
     echo '[Interface]'
     echo "PrivateKey = ${wg_client_priv_key}"
     echo "Address    = ${wg_client_ip}"
-    # NOTE: second IP is router fallback, which also routes through the server primarily
-    echo "DNS        = ${wg_server_ip},10.0.0.1"
+    echo "DNS        = ${wg_server_ip}"
     echo ''
     echo "[Peer]"
     echo "PublicKey  = ${server_public_key}"
-    echo "AllowedIPs = 0.0.0.0/0"
+    echo "AllowedIPs = 0.0.0.0/0, ::/0"
     echo "Endpoint   = ${server_public_address}"
 }
 conf="$(gen_conf)"
