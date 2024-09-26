@@ -5,9 +5,9 @@ set -o pipefail
 
 >&2 echo "Configuring wireguard"
 
-# TODO: hardcoding this stinks, but auto-detecting is :effort:
-readonly eth_iface='enp0s25'
 readonly wg_iface='wg0'
+readonly eth_iface="$(ip addr show | awk '/inet.*brd/{print $NF}' | grep -xFv -- "${wg_iface}")"
+[[ -z "${eth_iface}" ]] && (>&2 echo "ERROR: Failed to autodetect ethernet interface"; exit 1)
 readonly wg_conf_path="/etc/wireguard/${wg_iface}.conf"
 readonly peers_conf_path="/etc/wireguard/${wg_iface}-peers.conf"
 
