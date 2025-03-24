@@ -36,10 +36,17 @@ cat <<EOF >/etc/systemd/system/apt-daily.timer.d/override.conf
 [Timer]
 OnCalendar=
 OnCalendar=*-*-* *:20:00
-RandomizedDelaySec=15m
+RandomizedDelaySec=5m
+EOF
+
+mkdir -p /etc/systemd/system/apt-daily-upgrade.timer.d/
+cat <<EOF >/etc/systemd/system/apt-daily-upgrade.timer.d/override.conf
+[Timer]
+OnCalendar=
+OnCalendar=*-*-* *:30:00
 EOF
 
 systemctl daemon-reload
 
-# upgrade once
+# run upgrade once
 unattended-upgrade -d || true
