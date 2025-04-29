@@ -55,7 +55,8 @@ apt_install \
     plexmediaserver \
     rsync screen \
     transmission-daemon \
-    wireguard qrencode dnsutils
+    wireguard qrencode dnsutils \
+    unattended-upgrades
 # backports packages
 apt_install -t "${codename_backports:?}" \
     dkms spl-dkms \
