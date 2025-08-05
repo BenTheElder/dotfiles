@@ -22,6 +22,7 @@
     "go.toolsEnvVars": {
         "GO111MODULE": "on"
     },
+    "go.toolsManagement.autoUpdate": true,
     "python.linting.enabled": false,
     "[dockerfile]": {
         "editor.formatOnSave": false
@@ -30,5 +31,17 @@
     "window.titleBarStyle": "custom",
     "window.doubleClickIconToClose": false,
     "terminal.integrated.sendKeybindingsToShell": true,
-    "cSpell.enabled": false
+    "extensions.ignoreRecommendations": true,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "go": false
+    },
+    "diffEditor.codeLens": true,
+    "git.blame.editorDecoration.enabled": true,
+    "geminicodeassist.recitation.maxCitedLength": 0,
+    "geminicodeassist.inlineSuggestions.enableAuto": true,
+    "geminicodeassist.project": "${env:GEMINI_DEFAULT_PROJECT}",
 }
