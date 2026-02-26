@@ -40,8 +40,5 @@
         "go": false
     },
     "diffEditor.codeLens": true,
-    "git.blame.editorDecoration.enabled": true,
-    "geminicodeassist.recitation.maxCitedLength": 0,
-    "geminicodeassist.inlineSuggestions.enableAuto": true,
-    "geminicodeassist.project": "${env:GEMINI_DEFAULT_PROJECT}",
+    "git.blame.editorDecoration.enabled": true
 }
