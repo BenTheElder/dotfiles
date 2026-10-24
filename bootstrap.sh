@@ -119,6 +119,11 @@ main()
       symlink_dir
     fi
   fi
+  read -p "Setup shared agent config (AGENTS.md, skills)? (y/n): " -n 1 reply;
+  echo "";
+  if [[ ${reply} =~ ^[Y|y]$ ]]; then
+    "${DIR}/utils/setup_agent_config.sh"
+  fi
 }
 
 main "$@"
