@@ -10,7 +10,6 @@
     ],
     "editor.renderWhitespace": "boundary",
     "editor.scrollBeyondLastLine": false,
-    "workbench.colorTheme": "Visual Studio Dark",
     "workbench.iconTheme": "vs-seti",
     "search.exclude": {
         "**/node_modules": true,
@@ -40,5 +39,11 @@
         "go": false
     },
     "diffEditor.codeLens": true,
-    "git.blame.editorDecoration.enabled": true
+    "git.blame.editorDecoration.enabled": true,
+    "chat.fontSize": 16,
+    "http.systemCertificates": false,
+    // shared agent config from utils/setup_agent_config.sh is linked into
+    // ~/.claude/rules and ~/.claude/skills, which copilot reads by default
+    "chat.useAgentSkills": true,
+    "chat.includeApplyingInstructions": true
 }
